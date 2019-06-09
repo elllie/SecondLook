@@ -55,14 +55,36 @@ class AwarenessHome extends StatelessWidget {
           onTap: () {
             print('Card 1 tapped.');
             },
-          child: Column(
-            children: <Widget>[
-              // image
-              Text('The relationship spectrum', style: TextStyle(fontSize: 24.0)),
-              Text('Learn about the factors that make a relationship healthy, abusive, or somewhere in between'),
-            ],
+          child: const ListTile(
+            leading: Icon(Icons.favorite, color: Colors.pinkAccent,),
+            title: Text('The relationship spectrum'),
+            subtitle: Text('Learn the factors that make a relationship healthy, abusive, or somewhere in between'),
           ),
           ),
+        ),
+        Card(child: InkWell(
+          splashColor: Colors.pinkAccent.withAlpha(30),
+          onTap: () {
+            print('Card 2 tapped.');
+          },
+          child: const ListTile(
+            leading: Icon(Icons.live_help, color: Colors.pinkAccent,),
+            title: Text('Dating abuse statistics'),
+            subtitle: Text('Frequently asked questions about dating abuse'),
+          ),
+        ),
+        ),
+        Card(child: InkWell(
+          splashColor: Colors.pinkAccent.withAlpha(30),
+          onTap: () {
+            print('Card 3 tapped.');
+          },
+          child: const ListTile(
+            leading: Icon(Icons.content_paste, color: Colors.pinkAccent,),
+            title: Text('Relationship quiz'),
+            subtitle: Text('Are you in an abusive relationship? This quiz can help you find out'),
+          ),
+        ),
         ),
       ],
     );
