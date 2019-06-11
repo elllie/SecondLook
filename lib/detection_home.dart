@@ -9,6 +9,7 @@ class DetectionHome extends StatefulWidget {
 class _DetectionHomeState extends State<DetectionHome> {
   final myController = TextEditingController();
   final ContactPicker _contactPicker = new ContactPicker();
+  Contact _contact;
 
   @override
   void dispose() {
@@ -41,6 +42,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                 onPressed: () async {
                   Contact contact = await _contactPicker.selectContact();
                   setState(() {
+                    _contact = contact;
                     myController.text = contact.phoneNumber.number;
                   });
                 },
@@ -52,7 +54,16 @@ class _DetectionHomeState extends State<DetectionHome> {
                   return showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(content: Text(myController.text),);
+                      return AlertDialog(
+                        title: Text('Context matters.'),
+                        content: Text('Each text message on the following page has been labeled as “abusive” or “non-abusive” by our detection algorithm.\n\nThe algorithm only analyzes one message at a time. It is your job to look at the whole story.\n\nThough you will see a percentage of abusive messages, it is NOT a final judgement on the healthiness of your relationship. It is only a tool to aid your personal decision.\n\nIf you need the support of a human, the Resources tab can help.'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('I UNDERSTAND, SHOW\nME THE RESULTS', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
+                            onPressed: () {},
+                          )
+                        ],
+                      );
                     }
                   );
                 },
