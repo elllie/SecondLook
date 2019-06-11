@@ -100,32 +100,38 @@ class DetectionHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Text('This app contains a machine learning algorithm which can detect abusive language patterns in text messages.'),
-        Text('Select a contact or enter any phone number to analyze all the messages that person has sent you.'),
-        TextField(decoration: InputDecoration(
+        Text('This app contains a machine learning algorithm which can detect abusive language patterns in text messages.\n\nSelect a contact or enter any phone number to analyze all the messages that person has sent you.'),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: TextField(decoration: InputDecoration(
             labelText: 'Enter a phone #...'),
             keyboardType: TextInputType.phone,
-        ),
+        ), ),
         Row(
-          children: <Widget>[
-            Expanded(child: Text('...or', textAlign: TextAlign.center,),), // Expanded
-            RaisedButton(
-              onPressed: () {},
-              child: const Text('SELECT FROM CONTACTS'),
-            ),
-            RaisedButton(
-              onPressed: () {},
-              textColor: Colors.white,
-              color: Colors.pinkAccent,
-              child: const Text('ANALYZE'),
-            ),
-          ],
-        )
-      ],
-      // row: "...or" + select button + analyze button
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(child: Text('...or', textAlign: TextAlign.center,),), // Expanded
+              RaisedButton(
+                onPressed: () {},
+                child: const Text('SELECT CONTACT'),
+              ),
+              Spacer(),
+              RaisedButton(
+                onPressed: () {},
+                textColor: Colors.white,
+                color: Colors.pinkAccent,
+                child: const Text('ANALYZE'),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
