@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:contact_picker/contact_picker.dart';
 
 class DetectionHome extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class DetectionHome extends StatefulWidget {
 
 class _DetectionHomeState extends State<DetectionHome> {
   final myController = TextEditingController();
+  final ContactPicker _contactPicker = new ContactPicker();
 
   @override
   void dispose() {
@@ -36,7 +38,12 @@ class _DetectionHomeState extends State<DetectionHome> {
             children: <Widget>[
               Expanded(child: Text('...or', textAlign: TextAlign.center,),), // Expanded
               RaisedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  Contact contact = await _contactPicker.selectContact();
+                  setState(() {
+                    myController.text = contact.phoneNumber.number;
+                  });
+                },
                 child: const Text('SELECT CONTACT'),
               ),
               Spacer(),
@@ -45,7 +52,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                   return showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(content: Text(myController.text));
+                      return AlertDialog(content: Text(myController.text),);
                     }
                   );
                 },
