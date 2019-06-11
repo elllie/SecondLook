@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "awareness_relationship_spectrum.dart";
 
 void main() => runApp(MyApp());
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           ),
           body: TabBarView(children: [
             AwarenessHome(),
-            Text('Detection'),
+            DetectionHome(),
             Text('Resources'),
           ]),
         ),
@@ -53,12 +54,13 @@ class AwarenessHome extends StatelessWidget {
         Card(child: InkWell(
           splashColor: Colors.pinkAccent.withAlpha(30),
           onTap: () {
-            print('Card 1 tapped.');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
             },
           child: const ListTile(
             leading: Icon(Icons.favorite, color: Colors.pinkAccent,),
             title: Text('The relationship spectrum'),
             subtitle: Text('Learn the factors that make a relationship healthy, abusive, or somewhere in between'),
+            dense: false,
           ),
           ),
         ),
@@ -71,6 +73,7 @@ class AwarenessHome extends StatelessWidget {
             leading: Icon(Icons.live_help, color: Colors.pinkAccent,),
             title: Text('Dating abuse statistics'),
             subtitle: Text('Frequently asked questions about dating abuse'),
+            dense: false,
           ),
         ),
         ),
@@ -83,6 +86,7 @@ class AwarenessHome extends StatelessWidget {
             leading: Icon(Icons.content_paste, color: Colors.pinkAccent,),
             title: Text('Relationship quiz'),
             subtitle: Text('Are you in an abusive relationship? This quiz can help you find out'),
+            dense: false,
           ),
         ),
         ),
@@ -91,5 +95,50 @@ class AwarenessHome extends StatelessWidget {
   }
 
 }
+
+class DetectionHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Text('This app contains a machine learning algorithm which can detect abusive language patterns in text messages.'),
+        Text('Select a contact or enter any phone number to analyze all the messages that person has sent you.'),
+        TextField(decoration: InputDecoration(
+            labelText: 'Enter a phone #...'),
+            keyboardType: TextInputType.phone,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(child: Text('...or', textAlign: TextAlign.center,),), // Expanded
+            RaisedButton(
+              onPressed: () {},
+              child: const Text('SELECT FROM CONTACTS'),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              textColor: Colors.white,
+              color: Colors.pinkAccent,
+              child: const Text('ANALYZE'),
+            ),
+          ],
+        )
+      ],
+      // row: "...or" + select button + analyze button
+    );
+  }
+
+}
+
+class ResourcesHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('Resources');
+  }
+  }
+
+
 
 
