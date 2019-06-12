@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contact_picker/contact_picker.dart';
+import "detection_results.dart"
 
 class DetectionHome extends StatefulWidget {
   @override
@@ -9,8 +10,8 @@ class DetectionHome extends StatefulWidget {
 class _DetectionHomeState extends State<DetectionHome> {
   final myController = TextEditingController();
   final ContactPicker _contactPicker = new ContactPicker();
-  Contact _contact;
 
+//  public
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
@@ -42,7 +43,6 @@ class _DetectionHomeState extends State<DetectionHome> {
                 onPressed: () async {
                   Contact contact = await _contactPicker.selectContact();
                   setState(() {
-                    _contact = contact;
                     myController.text = contact.phoneNumber.number;
                   });
                 },
@@ -51,6 +51,7 @@ class _DetectionHomeState extends State<DetectionHome> {
               Spacer(),
               RaisedButton(
                 onPressed: () {
+                  DetectionResults.setContact(myController.text);
                   return showDialog(
                     context: context,
                     builder: (context) {
