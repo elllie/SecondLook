@@ -27,13 +27,25 @@ class DetectionResults extends StatelessWidget {
     for(var i = 0; i < messages.length; i++) {
       if (sameNumber(address, messages.elementAt(i))) { // If the other person sent it.
         if (isAbusive(messages.elementAt(i).body)) {
-          // TODO: Create abusive message container
+          conversation.add(new Container(
+            padding: EdgeInsets.all(8.0),
+            color: Colors.pinkAccent[400],
+            child: Text(messages.elementAt(i).body,  style: TextStyle(color: Colors.white),), // Text
+          ));
           abusiveCount++;
         } else {
-          // TODO: Create non-abusive message container
+          conversation.add(new Container(
+            padding: EdgeInsets.all(8.0),
+            color: Colors.grey[200],
+            child: Text(messages.elementAt(i).body,  style: TextStyle(color: Colors.black),), // Text
+          ));
         }
       } else {    // If I sent it.
-        // TODO: Create sent message container
+        conversation.add(new Container(
+          padding: EdgeInsets.all(8.0),
+          color: Colors.pinkAccent[100],
+          child: Text(messages.elementAt(i).body,  style: TextStyle(color: Colors.black),), // Text
+        ));
       }
       msgCount++;
     }
@@ -68,7 +80,10 @@ class DetectionResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return null;
+    return ListView(
+      padding: EdgeInsets.all(16.0),
+      children: createConversation(),
+    );
   }
 
 }
