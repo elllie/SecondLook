@@ -52,6 +52,7 @@ class _DetectionHomeState extends State<DetectionHome> {
               RaisedButton(
                 onPressed: () {
                   DetectionResults.setContact(myController.text);
+                  DetectionResults().collectMsgs();
                   return showDialog(
                     context: context,
                     builder: (context) {
