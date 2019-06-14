@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contact_picker/contact_picker.dart';
-import "detection_results.dart"
+import "detection_results.dart";
 
 class DetectionHome extends StatefulWidget {
   @override
@@ -62,7 +62,11 @@ class _DetectionHomeState extends State<DetectionHome> {
                         actions: <Widget>[
                           FlatButton(
                             child: Text('I UNDERSTAND, SHOW\nME THE RESULTS', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetectionResults()));
+                              // TODO: Create Bottom Sheet
+                             // Scaffold.of(context).showBottomSheet(builder);
+                            },
                           )
                         ],
                       );
