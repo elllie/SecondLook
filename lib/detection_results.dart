@@ -28,12 +28,14 @@ class DetectionResults extends StatelessWidget {
       if (sameNumber(address, messages.elementAt(i))) { // If the other person sent it.
         if (isAbusive(messages.elementAt(i).body)) {
           // TODO: Create abusive message container
+          abusiveCount++;
         } else {
           // TODO: Create non-abusive message container
         }
       } else {    // If I sent it.
         // TODO: Create sent message container
       }
+      msgCount++;
     }
     return conversation;
   }
