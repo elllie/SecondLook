@@ -15,14 +15,14 @@ class DetectionResults extends StatelessWidget {
     address = number;
   }
 
-  Future<void> collectMsgs() async {
-    messages =  await query.querySms(address: address);
+  void getMessages() async {
+    messages = await query.getAllSms;
     print(messages);
   }
 
   List<Widget> createConversation() {
     List<Widget> conversation;
-    messages.sort((msg1, msg2) => msg1.address.compareTo(msg2.address));
+//    messages.sort((msg1, msg2) => msg1.address.compareTo(msg2.address));
 
     for(var i = 0; i < messages.length; i++) {
       if (sameNumber(address, messages.elementAt(i))) { // If the other person sent it.
@@ -54,7 +54,7 @@ class DetectionResults extends StatelessWidget {
 
   bool isAbusive(String message) {
     // TODO: Send to detection algorithm
-    return message.length >= 100;
+    return message.length % 2 == 0;
   }
 
   bool sameNumber(String contact, SmsMessage msg2) {
@@ -82,7 +82,7 @@ class DetectionResults extends StatelessWidget {
     // TODO: add BottomSheet
     return ListView(
       padding: EdgeInsets.all(16.0),
-      children: createConversation(),
+      children: createConversation() as List<Widget>,
     );
   }
 

@@ -8,14 +8,14 @@ class DetectionHome extends StatefulWidget {
 }
 
 class _DetectionHomeState extends State<DetectionHome> {
-  final myController = TextEditingController();
+  final _myController = TextEditingController();
   final ContactPicker _contactPicker = new ContactPicker();
 
 //  public
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
-    myController.dispose();
+    _myController.dispose();
     super.dispose();
   }
 
@@ -33,7 +33,7 @@ class _DetectionHomeState extends State<DetectionHome> {
             child: TextField(
               decoration: InputDecoration(labelText: 'Enter a phone #...'),
               keyboardType: TextInputType.phone,
-              controller: myController,
+              controller: _myController,
             ), ),
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -43,7 +43,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                 onPressed: () async {
                   Contact contact = await _contactPicker.selectContact();
                   setState(() {
-                    myController.text = contact.phoneNumber.number;
+                    _myController.text = contact.phoneNumber.number;
                   });
                 },
                 child: const Text('SELECT CONTACT'),
@@ -51,8 +51,8 @@ class _DetectionHomeState extends State<DetectionHome> {
               Spacer(),
               RaisedButton(
                 onPressed: () {
-                  DetectionResults.setContact(myController.text);
-                  DetectionResults().collectMsgs();
+                  DetectionResults.setContact(_myController.text);
+//                  DetectionResults().createConversation();
                   return showDialog(
                     context: context,
                     builder: (context) {
@@ -62,8 +62,10 @@ class _DetectionHomeState extends State<DetectionHome> {
                         actions: <Widget>[
                           FlatButton(
                             child: Text('I UNDERSTAND, SHOW\nME THE RESULTS', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetectionResults()));
+                            onPressed: () async {
+                              DetectionResults resultsPage = new DetectionResults();
+                              resultsPage.getMessages();
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
                               // TODO: Create Bottom Sheet
                              // Scaffold.of(context).showBottomSheet(builder);
                             },
