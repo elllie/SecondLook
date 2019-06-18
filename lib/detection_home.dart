@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:contact_picker/contact_picker.dart';
 import "detection_results.dart";
 
+
 class DetectionHome extends StatefulWidget {
   @override
   _DetectionHomeState createState() => _DetectionHomeState();
@@ -52,7 +53,7 @@ class _DetectionHomeState extends State<DetectionHome> {
               RaisedButton(
                 onPressed: () {
                   DetectionResults.setContact(_myController.text);
-                  DetectionResults().createConversation();
+//                  DetectionResults().createConversation();
                   return showDialog(
                     context: context,
                     builder: (context) {
@@ -61,7 +62,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                         content: Text('Each text message on the following page has been labeled as “abusive” or “non-abusive” by our detection algorithm.\n\nThe algorithm only analyzes one message at a time. It is your job to look at the whole story.\n\nThough you will see a percentage of abusive messages, it is NOT a final judgement on the healthiness of your relationship. It is only a tool to aid your personal decision.\n\nIf you need the support of a human, the Resources tab can help.'),
                         actions: <Widget>[
                           FlatButton(
-                            child: Text('I UNDERSTAND, SHOW\nME THE RESULTS', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
+                            child: Text('OK', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
                             onPressed: () async {
                               DetectionResults resultsPage = new DetectionResults();
                               resultsPage.getMessages();

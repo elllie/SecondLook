@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sms/contact.dart';
 import 'package:sms/sms.dart';
+import 'dart:io';
 
 class DetectionResults extends StatelessWidget {
   ContactQuery contacts = new ContactQuery();
   SmsQuery query = new SmsQuery();
+
+  // This needs to be static because contact-picking happens long before instantiation
   static String address;
 
   List<SmsMessage> messages;
+//  bool _messagesCollected = false;//, _messagesAnalyzed = false;
   List<Widget> conversation;
   int msgCount, abusiveCount;
 
@@ -17,12 +21,14 @@ class DetectionResults extends StatelessWidget {
 
   void getMessages() async {
     messages = await query.getAllSms;
-    print(messages);
   }
 
   List<Widget> createConversation() {
     List<Widget> conversation;
-//    messages.sort((msg1, msg2) => msg1.address.compareTo(msg2.address));
+    while (messages == null) {
+      sleep(const Duration(seconds: 1));
+    }
+    messages.sort((msg1, msg2) => msg1.dateSent.compareTo(msg2.dateSent));
 
     for(var i = 0; i < messages.length; i++) {
       if (sameNumber(address, messages.elementAt(i))) { // If the other person sent it.
