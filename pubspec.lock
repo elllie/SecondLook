@@ -48,6 +48,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -93,13 +100,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  sms:
+  sms_maintained:
     dependency: "direct main"
     description:
-      name: sms
+      name: sms_maintained
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.4"
+    version: "0.2.5"
   source_span:
     dependency: transitive
     description:

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sms/contact.dart';
-import 'package:sms/sms.dart';
-import 'dart:io';
+import 'package:sms_maintained/sms.dart';
 
 class DetectionResults extends StatelessWidget {
-  ContactQuery contacts = new ContactQuery();
   SmsQuery query = new SmsQuery();
 
   // This needs to be static because contact-picking happens long before instantiation
   static String address;
 
   List<SmsMessage> messages;
-//  bool _messagesCollected = false;//, _messagesAnalyzed = false;
+  bool _messagesCollected = false;//, _messagesAnalyzed = false;
   List<Widget> conversation;
   int msgCount, abusiveCount;
 
@@ -20,13 +17,16 @@ class DetectionResults extends StatelessWidget {
   }
 
   void getMessages() async {
-    messages = await query.getAllSms;
+    print(address);
+    messages = await query.querySms(address: address);
+    _messagesCollected = true;
+    print(messages);
   }
 
   List<Widget> createConversation() {
     List<Widget> conversation;
     while (messages == null) {
-      sleep(const Duration(seconds: 1));
+      Future sleepy = Future.delayed(Duration(seconds: 30));
     }
     messages.sort((msg1, msg2) => msg1.dateSent.compareTo(msg2.dateSent));
 
