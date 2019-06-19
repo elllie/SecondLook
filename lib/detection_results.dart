@@ -1,27 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sms_maintained/sms.dart';
 
 class DetectionResults extends StatelessWidget {
-  SmsQuery query = new SmsQuery();
-
-  // This needs to be static because contact-picking happens long before instantiation
-  static String address;
-
-  List<SmsMessage> messages;
-  bool _messagesCollected = false;//, _messagesAnalyzed = false;
   List<Widget> conversation;
-  int msgCount, abusiveCount;
-
-  static void setContact(String number) {
-    address = number;
-  }
-
-  void getMessages() async {
-    print(address);
-    messages = await query.querySms(address: address);
-    _messagesCollected = true;
-    print(messages);
-  }
+  int msgCount = 0, abusiveCount = 0;
 
   List<Widget> createConversation() {
     List<Widget> conversation;
@@ -58,30 +39,6 @@ class DetectionResults extends StatelessWidget {
     return conversation;
   }
 
-  bool isAbusive(String message) {
-    // TODO: Send to detection algorithm
-    return message.length % 2 == 0;
-  }
-
-  bool sameNumber(String contact, SmsMessage msg2) {
-    int address1, address2;
-
-    String temp = contact.replaceAll(r'(', '');
-    temp.replaceAll(r')', '');
-    temp.replaceAll(r'-', '');
-    temp.replaceAll(r' ', '');
-    print('address 1: ' + temp);
-    address1 = int.parse(temp);
-
-    temp = msg2.address.replaceAll(r'(', '');
-    temp.replaceAll(r')', '');
-    temp.replaceAll(r'-', '');
-    temp.replaceAll(r' ', '');
-    print('address 2:' + temp);
-    address2 = int.parse(temp);
-
-    return (address1 == address2);
-  }
 
   @override
   Widget build(BuildContext context) {
