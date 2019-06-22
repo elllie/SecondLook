@@ -4,13 +4,9 @@ import 'package:sms_maintained/sms.dart';
 import "detection_results.dart";
 
 class DetectionLoadingState extends State<DetectionLoading> {
-  String _phoneNumber;
-  String get phoneNumber => _phoneNumber;
-  set phoneNumber(String phoneNumber) {
-    _phoneNumber = phoneNumber;
-  }
+  static String phoneNumber;
 
-  String _currentAction;
+  String _currentAction = "Starting up...";
   String get currentAction => _currentAction;
   set currentAction(String action) {
     _currentAction = action;
@@ -18,8 +14,11 @@ class DetectionLoadingState extends State<DetectionLoading> {
 
   SmsQuery query = new SmsQuery();
 
-  void doStuff() {
+  void doStuff() async {
     DetectionResults resultsPage = new DetectionResults();
+    List<AnalyzedMessage> msgList = await analyzeMessages();
+    createConversation(msgList, resultsPage);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
   }
 
   Future<List<SmsMessage>> getMessages() async {
@@ -29,13 +28,14 @@ class DetectionLoadingState extends State<DetectionLoading> {
     return await query.querySms(address: phoneNumber);
   }
 
-  List<SmsMessage> analyzeMessages() {
-    List<SmsMessage> messages = getMessages() as List<SmsMessage>;
+  Future<List<SmsMessage>> analyzeMessages() async {
+    List<SmsMessage> messages = await getMessages();
     setState(() { currentAction = "Preparing for analysis... (Step 2 of 4)"; });
     List<AnalyzedMessage> analyzedMessages;
     setState(() { currentAction = "Analyzing messages... (Step 3 of 4)"; });
     for(var i = 0; i < messages.length; i++) {
-      analyzedMessages.add(new AnalyzedMessage(messages.elementAt(i).address, messages.elementAt(i).body, messages.elementAt(i).body.length % 2 == 0));
+      analyzedMessages.add(new AnalyzedMessage(messages.elementAt(i).address, messages.elementAt(i).body,
+          (messages.elementAt(i).address == phoneNumber && messages.elementAt(i).body.length % 2 == 0)));
     }
     // TODO: Add server stuff
     return analyzedMessages;
@@ -87,11 +87,18 @@ class DetectionLoadingState extends State<DetectionLoading> {
       ),
     );
   }
+
+  @override
+  void initState() => widget.onLoad(context);
 }
 
 class DetectionLoading extends StatefulWidget {
   @override
   DetectionLoadingState createState() => DetectionLoadingState();
+
+  void onLoad(BuildContext context){
+    DetectionLoadingState().doStuff();
+  }
 }
 
 class AnalyzedMessage extends SmsMessage {

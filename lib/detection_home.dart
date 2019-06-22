@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contact_picker/contact_picker.dart';
-import "detection_results.dart";
+import "detection_loading.dart";
 
 
 class DetectionHome extends StatefulWidget {
@@ -52,8 +52,7 @@ class _DetectionHomeState extends State<DetectionHome> {
               Spacer(),
               RaisedButton(
                 onPressed: () {
-                  DetectionResults.setContact(_myController.text);
-//                  DetectionResults().createConversation();
+                  DetectionLoadingState.phoneNumber = _myController.text;
                   return showDialog(
                     context: context,
                     builder: (context) {
@@ -64,9 +63,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                           FlatButton(
                             child: Text('OK', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
                             onPressed: () async {
-                              DetectionResults resultsPage = new DetectionResults();
-                              resultsPage.getMessages();
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
+                              Navigator.of(context).push(context, MaterialPageRoute(builder: (context) => DetectionLoading()));
                               // TODO: Create Bottom Sheet
                              // Scaffold.of(context).showBottomSheet(builder);
                             },
