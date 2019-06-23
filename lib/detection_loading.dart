@@ -14,7 +14,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
 
   SmsQuery query = new SmsQuery();
 
-  void doStuff() async {
+  void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
     DetectionResults resultsPage = new DetectionResults();
     List<AnalyzedMessage> msgList = await analyzeMessages();
     createConversation(msgList, resultsPage);
@@ -31,7 +31,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
   Future<List<SmsMessage>> analyzeMessages() async {
     List<SmsMessage> messages = await getMessages();
     setState(() { currentAction = "Preparing for analysis... (Step 2 of 4)"; });
-    List<AnalyzedMessage> analyzedMessages;
+    List<AnalyzedMessage> analyzedMessages = new List<AnalyzedMessage>();
     setState(() { currentAction = "Analyzing messages... (Step 3 of 4)"; });
     for(var i = 0; i < messages.length; i++) {
       analyzedMessages.add(new AnalyzedMessage(messages.elementAt(i).address, messages.elementAt(i).body,
@@ -42,7 +42,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   void createConversation(List<AnalyzedMessage> analyzedMessages, DetectionResults results) {
-    List<Widget> conversation;
+    List<Widget> conversation = new List<Widget>();
     setState(() { currentAction = "Generating report... (Step 4 of 4)"; });
     for(var i = 0; i < analyzedMessages.length; i++) {
       if (phoneNumber == analyzedMessages.elementAt(i).address) { // If the other person sent it.
@@ -69,11 +69,12 @@ class DetectionLoadingState extends State<DetectionLoading> {
       }
       results.msgCount++;
     }
-    results.conversation = conversation;
+    results.conversation = conversation.reversed;
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(doStuff);
     return Center(
       child: Column(
         children: <Widget>[
@@ -87,18 +88,12 @@ class DetectionLoadingState extends State<DetectionLoading> {
       ),
     );
   }
-
-  @override
-  void initState() => widget.onLoad(context);
 }
 
 class DetectionLoading extends StatefulWidget {
   @override
   DetectionLoadingState createState() => DetectionLoadingState();
 
-  void onLoad(BuildContext context){
-    DetectionLoadingState().doStuff();
-  }
 }
 
 class AnalyzedMessage extends SmsMessage {

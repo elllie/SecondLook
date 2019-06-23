@@ -53,25 +53,25 @@ class _DetectionHomeState extends State<DetectionHome> {
               RaisedButton(
                 onPressed: () {
                   DetectionLoadingState.phoneNumber = _myController.text;
-                  return showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Context matters.'),
-                        content: Text('Each text message on the following page has been labeled as “abusive” or “non-abusive” by our detection algorithm.\n\nThe algorithm only analyzes one message at a time. It is your job to look at the whole story.\n\nThough you will see a percentage of abusive messages, it is NOT a final judgement on the healthiness of your relationship. It is only a tool to aid your personal decision.\n\nIf you need the support of a human, the Resources tab can help.'),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text('OK', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
-                            onPressed: () async {
+//                  return showDialog(
+//                    context: context,
+//                    builder: (context) {
+//                      return AlertDialog(
+//                        title: Text('Context matters.'),
+//                        content: Text('Each text message on the following page has been labeled as “abusive” or “non-abusive” by our detection algorithm.\n\nThe algorithm only analyzes one message at a time. It is your job to look at the whole story.\n\nThough you will see a percentage of abusive messages, it is NOT a final judgement on the healthiness of your relationship. It is only a tool to aid your personal decision.\n\nIf you need the support of a human, the Resources tab can help.'),
+//                        actions: <Widget>[
+//                          FlatButton(
+//                            child: Text('OK', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
+//                            onPressed: () async {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => DetectionLoading()));
                               // TODO: Create Bottom Sheet
                              // Scaffold.of(context).showBottomSheet(builder);
-                            },
-                          )
-                        ],
-                      );
-                    }
-                  );
+//                            },
+//                          )
+//                        ],
+//                      );
+//                    }
+//                  );
                 },
                 textColor: Colors.white,
                 color: Colors.pinkAccent,

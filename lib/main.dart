@@ -44,14 +44,19 @@ class MyApp extends StatelessWidget {
                     builder: (context) => AwarenessHome());
               },
           ),
-            DetectionHome(),
+            Navigator(
+              initialRoute: '/detection',
+              onGenerateRoute: (routeSettings) {
+                return MaterialPageRoute(
+                  builder: (context) => DetectionHome());
+              },
+            ),
             Text('Resources'),
           ]),
         ),
       ),
       routes: <String, WidgetBuilder> {
         '/awareness': (BuildContext context) => AwarenessHome(),
-        '/awareness/relationship-spectrum-1': (BuildContext context) => AwarenessRelationshipSpectrum(),
         '/detection': (BuildContext context) => DetectionHome(),
         '/resources': (BuildContext context) => ResourcesHome(),
       },
@@ -68,7 +73,7 @@ class AwarenessHome extends StatelessWidget {
         Card(child: InkWell(
           splashColor: Colors.pinkAccent.withAlpha(30),
           onTap: () {
-            Navigator.of(context).pushNamed('/awareness/relationship-spectrum-1'); //.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
             },
           child: const ListTile(
             leading: Icon(Icons.favorite, color: Colors.pinkAccent,),
