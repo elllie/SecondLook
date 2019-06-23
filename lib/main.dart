@@ -36,12 +36,25 @@ class MyApp extends StatelessWidget {
             ),
           ),
           body: TabBarView(children: [
-            AwarenessHome(),
+//            AwarenessHome(),
+            Navigator(
+              initialRoute: '/awareness',
+              onGenerateRoute: (routeSettings) {
+                return MaterialPageRoute(
+                    builder: (context) => AwarenessHome());
+              },
+          ),
             DetectionHome(),
             Text('Resources'),
           ]),
         ),
       ),
+      routes: <String, WidgetBuilder> {
+        '/awareness': (BuildContext context) => AwarenessHome(),
+        '/awareness/relationship-spectrum-1': (BuildContext context) => AwarenessRelationshipSpectrum(),
+        '/detection': (BuildContext context) => DetectionHome(),
+        '/resources': (BuildContext context) => ResourcesHome(),
+      },
     );
   }
 }
@@ -55,7 +68,7 @@ class AwarenessHome extends StatelessWidget {
         Card(child: InkWell(
           splashColor: Colors.pinkAccent.withAlpha(30),
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
+            Navigator.of(context).pushNamed('/awareness/relationship-spectrum-1'); //.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
             },
           child: const ListTile(
             leading: Icon(Icons.favorite, color: Colors.pinkAccent,),

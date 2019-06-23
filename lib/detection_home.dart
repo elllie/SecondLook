@@ -63,7 +63,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                           FlatButton(
                             child: Text('OK', softWrap: true, maxLines: 3, textAlign: TextAlign.right,),
                             onPressed: () async {
-                              Navigator.of(context).push(context, MaterialPageRoute(builder: (context) => DetectionLoading()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetectionLoading()));
                               // TODO: Create Bottom Sheet
                              // Scaffold.of(context).showBottomSheet(builder);
                             },
