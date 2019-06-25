@@ -33,7 +33,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
     setState(() { currentAction = "Preparing for analysis... (Step 2 of 4)"; });
     List<AnalyzedMessage> analyzedMessages = new List<AnalyzedMessage>();
     setState(() { currentAction = "Analyzing messages... (Step 3 of 4)"; });
-    for(var i = 0; i < messages.length; i++) {
+    for(var i = messages.length - 1; i >= 0; i--) {
       analyzedMessages.add(new AnalyzedMessage(messages.elementAt(i).address, messages.elementAt(i).body,
           (messages.elementAt(i).address == phoneNumber && messages.elementAt(i).body.length % 2 == 0)));
     }
@@ -69,7 +69,13 @@ class DetectionLoadingState extends State<DetectionLoading> {
       }
       results.msgCount++;
     }
-    results.conversation = conversation.reversed;
+    results.conversation = conversation;
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    super.dispose();
   }
 
   @override
