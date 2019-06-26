@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 class ResourcesHome extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class ResourcesHome extends StatefulWidget {
 
 class _ResourcesHomeState extends State<ResourcesHome> {
   final _myController = TextEditingController();
+  Position _position; // User's current location.
 
   @override
   void dispose() {
@@ -36,8 +39,9 @@ class _ResourcesHomeState extends State<ResourcesHome> {
                       ),
                       IconButton(
                         icon: Icon(Icons.room),
-                        onPressed: () {
-                          print("pressed location button");
+                        onPressed: () async {
+                          _position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
+                          print("location: " + _position.latitude.toString() + " lat, " + _position.longitude.toString() + " long");
                         },
                       )
                     ],

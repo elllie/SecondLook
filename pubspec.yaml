@@ -20,6 +20,7 @@ dependencies:
   contact_picker: ^0.0.2
   sms_maintained: ^0.2.0
   flutter_spinkit: ^3.1.0
+  geolocator: ^5.0.0
 
   flutter:
     sdk: flutter
