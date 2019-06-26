@@ -20,18 +20,28 @@ class _ResourcesHomeState extends State<ResourcesHome> {
     return Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: TextField(
-                decoration: InputDecoration(labelText: 'Enter your location'),
-                controller: _myController,
-              ), ),
-          ]
-        )
-    );
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    children: <Widget>[
+                      Flexible(
+                        child: TextField(
+                          decoration:
+                              InputDecoration(labelText: 'Enter your location'),
+                          controller: _myController,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.room),
+                        onPressed: () {
+                          print("pressed location button");
+                        },
+                      )
+                    ],
+                  )),
+            ]));
   }
-
 }

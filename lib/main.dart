@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "awareness_relationship_spectrum.dart";
 import "detection_home.dart";
+import "resources_home.dart";
 
 void main() => runApp(MyApp());
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
                   builder: (context) => DetectionHome());
               },
             ),
-            Text('Resources'),
+            ResourcesHome(),
           ]),
         ),
       ),
@@ -115,13 +116,6 @@ class AwarenessHome extends StatelessWidget {
 
 }
 
-class ResourcesHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Text('Resources');
-  }
-  }
 
 
 
