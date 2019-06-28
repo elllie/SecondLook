@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import "awareness_relationship_spectrum.dart";
 import "detection_home.dart";
 import "resources_home.dart";
+import "relationship_quiz.dart";
 
 void main() => runApp(MyApp());
 
@@ -100,7 +101,7 @@ class AwarenessHome extends StatelessWidget {
         Card(child: InkWell(
           splashColor: Colors.pinkAccent.withAlpha(30),
           onTap: () {
-            print('Card 3 tapped.');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => RelationshipQuizHome()));
           },
           child: const ListTile(
             leading: Icon(Icons.content_paste, color: Colors.pinkAccent,),
