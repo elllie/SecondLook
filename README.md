@@ -1,16 +1,9 @@
-# secondlook
+# SecondLook - A Mobile Phone Intervention for Digital Dating Abuse
 
-A new Flutter application.
+## Abstract
 
-## Getting Started
+Digital dating abuse has become a significant mental health crisis among the college-going population. Nearly half of all college women who are dating report experiencing violent and abusive dating behaviors. Existing technology and non-technology based intervention programs do not provide assistance at the onset of abuse.
 
-This project is a starting point for a Flutter application.
+SecondLook is an Android application that consists of a detection tool that classifies abusive digital content exchanged between partners, an educational component that provides information about healthy relationships, and a list of nearby resources for users to locate help.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+###### [Roy, Tania, "SecondLook: A Prototype Mobile Phone Intervention for Digital Dating Abuse" (2018). All Dissertations. 2190.](https://tigerprints.clemson.edu/all_dissertations/2190)
