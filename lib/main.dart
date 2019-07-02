@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.cyan,
       ),
       home: DefaultTabController(
         length: 3,
@@ -73,12 +73,12 @@ class AwarenessHome extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       children: <Widget>[
         Card(child: InkWell(
-          splashColor: Colors.pinkAccent.withAlpha(30),
+          splashColor: Theme.of(context).splashColor,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
             },
           child: const ListTile(
-            leading: Icon(Icons.favorite, color: Colors. pinkAccent,),
+            leading: Icon(Icons.favorite, color: Colors.pinkAccent,),
             title: Text('The relationship spectrum'),
             subtitle: Text('Learn the factors that make a relationship healthy, abusive, or somewhere in between'),
             dense: false,
@@ -86,12 +86,12 @@ class AwarenessHome extends StatelessWidget {
           ),
         ),
         Card(child: InkWell(
-          splashColor: Colors.pinkAccent.withAlpha(30),
+          splashColor: Theme.of(context).splashColor,
           onTap: () {
             print('Card 2 tapped.');
           },
           child: const ListTile(
-            leading: Icon(Icons.live_help, color: Colors.pinkAccent,),
+            leading: Icon(Icons.live_help, color: Colors.pinkAccent),
             title: Text('Dating abuse statistics'),
             subtitle: Text('Frequently asked questions about dating abuse'),
             dense: false,
@@ -99,7 +99,7 @@ class AwarenessHome extends StatelessWidget {
         ),
         ),
         Card(child: InkWell(
-          splashColor: Colors.pinkAccent.withAlpha(30),
+          splashColor: Theme.of(context).splashColor,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => RelationshipQuizHome()));
           },

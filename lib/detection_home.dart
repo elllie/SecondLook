@@ -74,7 +74,7 @@ class _DetectionHomeState extends State<DetectionHome> {
 //                  );
                 },
                 textColor: Colors.white,
-                color: Colors.pinkAccent,
+                color: Theme.of(context).buttonColor,
                 child: const Text('ANALYZE'),
               ),
             ],
