@@ -1,4 +1,4 @@
-# SecondLook - A Mobile Phone Intervention for Digital Dating Abuse
+# A mobile intervention for digital dating abuse
 
 ## Abstract
 
