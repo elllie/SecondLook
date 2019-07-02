@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sms_maintained/sms.dart';
 import "detection_results.dart";
+import 'package:http/http.dart' as http;
 
 class DetectionLoadingState extends State<DetectionLoading> {
   static String phoneNumber;
@@ -13,6 +15,12 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   SmsQuery query = new SmsQuery();
+
+  @override
+  void initState() {
+    super.initState();
+    doStuff(Duration(microseconds: 1));
+  }
 
   void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
     DetectionResults resultsPage = new DetectionResults();
@@ -29,16 +37,11 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   Future<List<SmsMessage>> analyzeMessages() async {
+    final String ip = "192.168.0.14";
     List<SmsMessage> messages = await getMessages();
-    setState(() { currentAction = "Preparing for analysis... (Step 2 of 4)"; });
-    List<AnalyzedMessage> analyzedMessages = new List<AnalyzedMessage>();
-    setState(() { currentAction = "Analyzing messages... (Step 3 of 4)"; });
-    for(var i = messages.length - 1; i >= 0; i--) {
-      analyzedMessages.add(new AnalyzedMessage(messages.elementAt(i).address, messages.elementAt(i).body,
-          (messages.elementAt(i).address == phoneNumber && messages.elementAt(i).body.length % 2 == 0)));
-    }
-    // TODO: Add server stuff
-    return analyzedMessages;
+    setState(() { currentAction = "Analyzing messages... (Step 2 of 3)"; });
+    var response = await http.post(ip, body: messages);
+    return json.decode(response.body);
   }
 
   void createConversation(List<AnalyzedMessage> analyzedMessages, DetectionResults results) {
@@ -80,7 +83,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(doStuff);
+//    WidgetsBinding.instance.addPostFrameCallback(doStuff);
     return Center(
       child: Column(
         children: <Widget>[

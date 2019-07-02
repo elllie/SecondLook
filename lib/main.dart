@@ -78,7 +78,7 @@ class AwarenessHome extends StatelessWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => AwarenessRelationshipSpectrum()));
             },
           child: const ListTile(
-            leading: Icon(Icons.favorite, color: Colors.pinkAccent,),
+            leading: Icon(Icons.favorite, color: Colors. pinkAccent,),
             title: Text('The relationship spectrum'),
             subtitle: Text('Learn the factors that make a relationship healthy, abusive, or somewhere in between'),
             dense: false,
