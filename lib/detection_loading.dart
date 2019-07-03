@@ -40,41 +40,40 @@ class DetectionLoadingState extends State<DetectionLoading> {
       currentAction = "Preparing for analysis...";
     });
     final double inch = 0.2 / (messages.length + 2);    // how much to move the progress bar
-    String messageString = """
-    {
-      "foos" : [
+    String messageString = """{
+      "thread" : [
       """;
     setState(() { progress += inch; });
     for (var i = 0; i < messages.length; i++) {
-      messageString += """
-      {
+      messageString += """{
         "body":"${messages.elementAt(i).body}",
-        "date":"${messages.elementAt(i).date}"
+        "date":"${messages.elementAt(i).date.millisecondsSinceEpoch}"
       },
       """;
       setState(() {
         progress += inch;
       });
     }
-    messageString += """
-         ]
-    }""";
+    messageString += "  ]\n}";
     setState(() { progress += inch; });
+    print(messageString);
     return messageString;
   }
 
-  Future<List<SmsMessage>> analyzeMessages() async {
-    final String ip = "192.168.0.14";    // matt house
+  Future<Map> analyzeMessages() async {
+//    final String ip = "http:127.0.0.1:5000";    // localhost
+    final String ip = "192.168.0.14:5000";    // matt house
 //    final String ip = "172.16.8.99";    // ncf
-    setState(() { currentAction = "Analyzing messages... (Step 2 of 3)"; });
+    setState(() { currentAction = "Analyzing messages..."; });
     String cleanMessages = await getMessages();
-    var response = await http.post("http://" + ip, body: json.encode(cleanMessages));
+    var response = await http.post(new Uri.http(ip, "/file"), body: json.encode(cleanMessages));
+    // TODO: Read the resulting JSON into a list of message objects
     return json.decode(response.body);
   }
 
   void createConversation(List<AnalyzedMessage> analyzedMessages, DetectionResults results) {
     List<Widget> conversation = new List<Widget>();
-    setState(() { currentAction = "Generating report... (Step 3 of 3)"; });
+    setState(() { currentAction = "Generating report..."; });
     for(var i = 0; i < analyzedMessages.length; i++) {
       if (phoneNumber == analyzedMessages.elementAt(i).address) { // If the other person sent it.
         if (analyzedMessages.elementAt(i).isAbusive) {
@@ -139,10 +138,15 @@ class DetectionLoading extends StatefulWidget {
 
 }
 
-class AnalyzedMessage extends SmsMessage {
+class AnalyzedMessage {
+  String address;
+  String body;
+  int date;
   bool isAbusive;
 
-  AnalyzedMessage(String address, String body, bool abusive) :
-        isAbusive = abusive,
-        super(address, body);
+  AnalyzedMessage(String address, String body, int date, bool abusive) :
+      this.address = address,
+      this.body = body,
+      this.date = date,
+      isAbusive = abusive;
 }
