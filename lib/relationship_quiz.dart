@@ -35,7 +35,7 @@ class RelationshipQuizHome extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => RelationshipQuiz()));
             },
             textColor: Colors.white,
-            color: Theme.of(context).buttonColor,
+            color: Colors.pinkAccent,
             child: const Text("START QUIZ"),
           )
         ])));
@@ -109,7 +109,7 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
               },
               child: const Text("NEXT"),
               textColor: Colors.white,
-              color: Theme.of(context).buttonColor,
+              color: Colors.pinkAccent,
             ),),
             Spacer(),
 //          ],)),

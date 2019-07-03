@@ -13,6 +13,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
   set currentAction(String action) {
     _currentAction = action;
   }
+  double progress = 0.0;
 
   SmsQuery query = new SmsQuery();
 
@@ -29,24 +30,51 @@ class DetectionLoadingState extends State<DetectionLoading> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
   }
 
-  Future<List<SmsMessage>> getMessages() async {
+  Future<String> getMessages() async {
     setState(() {
-      currentAction = "Retrieving messages... (Step 1 of 4)";
+      currentAction = "Retrieving messages...";
     });
-    return await query.querySms(address: phoneNumber);
+    List<SmsMessage> messages = await query.querySms(address: phoneNumber);
+    setState(() {
+      progress += 0.2;
+      currentAction = "Preparing for analysis...";
+    });
+    final double inch = 0.2 / (messages.length + 2);    // how much to move the progress bar
+    String messageString = """
+    {
+      "foos" : [
+      """;
+    setState(() { progress += inch; });
+    for (var i = 0; i < messages.length; i++) {
+      messageString += """
+      {
+        "body":"${messages.elementAt(i).body}",
+        "date":"${messages.elementAt(i).date}"
+      },
+      """;
+      setState(() {
+        progress += inch;
+      });
+    }
+    messageString += """
+         ]
+    }""";
+    setState(() { progress += inch; });
+    return messageString;
   }
 
   Future<List<SmsMessage>> analyzeMessages() async {
-    final String ip = "192.168.0.14";
-    List<SmsMessage> messages = await getMessages();
+    final String ip = "192.168.0.14";    // matt house
+//    final String ip = "172.16.8.99";    // ncf
     setState(() { currentAction = "Analyzing messages... (Step 2 of 3)"; });
-    var response = await http.post(ip, body: messages);
+    String cleanMessages = await getMessages();
+    var response = await http.post("http://" + ip, body: json.encode(cleanMessages));
     return json.decode(response.body);
   }
 
   void createConversation(List<AnalyzedMessage> analyzedMessages, DetectionResults results) {
     List<Widget> conversation = new List<Widget>();
-    setState(() { currentAction = "Generating report... (Step 4 of 4)"; });
+    setState(() { currentAction = "Generating report... (Step 3 of 3)"; });
     for(var i = 0; i < analyzedMessages.length; i++) {
       if (phoneNumber == analyzedMessages.elementAt(i).address) { // If the other person sent it.
         if (analyzedMessages.elementAt(i).isAbusive) {
@@ -85,16 +113,22 @@ class DetectionLoadingState extends State<DetectionLoading> {
   Widget build(BuildContext context) {
 //    WidgetsBinding.instance.addPostFrameCallback(doStuff);
     return Center(
-      child: Column(
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SpinKitPumpingHeart(
             color: Colors.pinkAccent,
             size: 40.0,
           ),
-          Spacer(),
+          LinearProgressIndicator(
+            value: progress,
+          ),
           Text(currentAction),
         ],
       ),
+    ),
     );
   }
 }
