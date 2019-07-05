@@ -40,30 +40,29 @@ class DetectionLoadingState extends State<DetectionLoading> {
       currentAction = "Preparing for analysis...";
     });
     final double inch = 0.2 / (messages.length + 2);    // how much to move the progress bar
-    String messageString = "[";/*""""{
-      "thread" : [
-      """;*/
+    String messageString = "";// """"""{ "thread" : [""";
     setState(() { progress += inch; });
     for (var i = 0; i < messages.length; i++) {
-      messageString += """{ "body":"${messages.elementAt(i).body}", "date":"${messages.elementAt(i).date.millisecondsSinceEpoch}" }""";
-      if (i != messages.length - 1) messageString += ",";
+      messageString += """{"body":"${messages.elementAt(i).body}", "date":"${messages.elementAt(i).date.millisecondsSinceEpoch}"}
+      """;
+//      if (i != messages.length - 1) messageString += ",";
       setState(() {
         progress += inch;
       });
     }
-    messageString += "\b]";//\n}";
+//    messageString += "]}";
     setState(() { progress += inch; });
     print(messageString);
     return messageString;
   }
 
   Future<Map> analyzeMessages() async {
-//    final String ip = "http:127.0.0.1:5000";    // localhost
-    final String ip = "192.168.0.14:5000";    // matt house
-//    final String ip = "172.16.8.99";    // ncf
+//    final String ip = "192.168.0.14:5000";    // matt house
+    final String ip = "172.16.8.88:5000";    // ncf
     setState(() { currentAction = "Analyzing messages..."; });
     String cleanMessages = await getMessages();
-    var response = await http.post(new Uri.http(ip, "/file"), body: json.encode(cleanMessages));
+    var response = await http.post(new Uri.http(ip, "/file"), body: cleanMessages);
+    print(json.decode(response.body));
     // TODO: Read the resulting JSON into a list of message objects
     return json.decode(response.body);
   }
