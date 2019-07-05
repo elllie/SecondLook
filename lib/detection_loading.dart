@@ -25,8 +25,8 @@ class DetectionLoadingState extends State<DetectionLoading> {
 
   void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
     DetectionResults resultsPage = new DetectionResults();
-    List<AnalyzedMessage> msgList = await analyzeMessages();
-    createConversation(msgList, resultsPage);
+    Map msgList = await analyzeMessages();
+    createConversation(new List<AnalyzedMessage>(), resultsPage); // msgList
     Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
   }
 
@@ -40,21 +40,18 @@ class DetectionLoadingState extends State<DetectionLoading> {
       currentAction = "Preparing for analysis...";
     });
     final double inch = 0.2 / (messages.length + 2);    // how much to move the progress bar
-    String messageString = """{
+    String messageString = "[";/*""""{
       "thread" : [
-      """;
+      """;*/
     setState(() { progress += inch; });
     for (var i = 0; i < messages.length; i++) {
-      messageString += """{
-        "body":"${messages.elementAt(i).body}",
-        "date":"${messages.elementAt(i).date.millisecondsSinceEpoch}"
-      },
-      """;
+      messageString += """{ "body":"${messages.elementAt(i).body}", "date":"${messages.elementAt(i).date.millisecondsSinceEpoch}" }""";
+      if (i != messages.length - 1) messageString += ",";
       setState(() {
         progress += inch;
       });
     }
-    messageString += "  ]\n}";
+    messageString += "\b]";//\n}";
     setState(() { progress += inch; });
     print(messageString);
     return messageString;
