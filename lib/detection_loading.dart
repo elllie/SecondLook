@@ -74,18 +74,25 @@ class DetectionLoadingState extends State<DetectionLoading> {
       if (analyzedMessages.elementAt(i)["abusive"]) {
         abusiveOnly.add(analyzedMessages.elementAt(i));
         results.abusiveCount++;
-        conversation.add(new Container(
-          padding: EdgeInsets.all(20.0),
-          child: Text(analyzedMessages.elementAt(i)["body"],
+        conversation.add(new Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(child: Container(
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(16.0),
+//              margin: EdgeInsets.only(left: 16.0, top: 16.0, right: 64.0, bottom: 16.0),
+              child: Text(analyzedMessages.elementAt(i)["body"],
                       style: TextStyle(color: Colors.white)),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),
                 topLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
-              color: Colors.pinkAccent),
-        ));
+                color: Colors.pinkAccent),
+        ),),
+            Icon(Icons.priority_high, color: Colors.pinkAccent, size: 48.0)]));
       } else {
         conversation.add(new Container(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(16.0),
+          margin: EdgeInsets.all(16.0),
           child: Text(analyzedMessages.elementAt(i)["body"],
               style: TextStyle(color: Colors.black)),
           decoration: BoxDecoration(
