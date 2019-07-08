@@ -26,7 +26,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
   void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
     DetectionResults resultsPage = new DetectionResults();
     List msgList = await analyzeMessages();
-    createConversation(new List<AnalyzedMessage>(), resultsPage); // msgList
+    createConversation(msgList, resultsPage); // msgList
     Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
   }
 
@@ -62,35 +62,36 @@ class DetectionLoadingState extends State<DetectionLoading> {
     setState(() { currentAction = "Analyzing messages..."; });
     String cleanMessages = await getMessages();
     var response = await http.post(new Uri.http(ip, "/file"), body: cleanMessages);
-    print(json.decode(response.body)); // json.decode returns a map
-    // TODO: Read the resulting JSON into a list of message objects
+    print(json.decode(response.body));  // list of maps
     return json.decode(response.body);
   }
 
-  void createConversation(List<AnalyzedMessage> analyzedMessages, DetectionResults results) {
+  void createConversation(List analyzedMessages, DetectionResults results) {
     List<Widget> conversation = new List<Widget>();
     setState(() { currentAction = "Generating report..."; });
-    for(var i = 0; i < analyzedMessages.length; i++) {
-      if (phoneNumber == analyzedMessages.elementAt(i).address) { // If the other person sent it.
-        if (analyzedMessages.elementAt(i).isAbusive) {
-          conversation.add(new Container(
-            padding: EdgeInsets.all(8.0),
-            color: Colors.pinkAccent[400],
-            child: Text(analyzedMessages.elementAt(i).body,  style: TextStyle(color: Colors.white),), // Text
-          ));
-          results.abusiveCount++;
-        } else {
-          conversation.add(new Container(
-            padding: EdgeInsets.all(8.0),
-            color: Colors.grey[200],
-            child: Text(analyzedMessages.elementAt(i).body,  style: TextStyle(color: Colors.black),), // Text
-          ));
-        }
-      } else {    // If I sent it.
+    List abusiveOnly = new List<Map>();
+    for(var i = analyzedMessages.length - 1; i >= 0; i--) {
+      if (analyzedMessages.elementAt(i)["abusive"]) {
+        abusiveOnly.add(analyzedMessages.elementAt(i));
+        results.abusiveCount++;
         conversation.add(new Container(
-          padding: EdgeInsets.all(8.0),
-          color: Colors.pinkAccent[100],
-          child: Text(analyzedMessages.elementAt(i).body,  style: TextStyle(color: Colors.black),), // Text
+          padding: EdgeInsets.all(20.0),
+          child: Text(analyzedMessages.elementAt(i)["body"],
+                      style: TextStyle(color: Colors.white)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),
+                topLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+              color: Colors.pinkAccent),
+        ));
+      } else {
+        conversation.add(new Container(
+          padding: EdgeInsets.all(20.0),
+          child: Text(analyzedMessages.elementAt(i)["body"],
+              style: TextStyle(color: Colors.black)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),
+                  topLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+              color: Theme.of(context).primaryColorLight),
         ));
       }
       results.msgCount++;
@@ -117,9 +118,11 @@ class DetectionLoadingState extends State<DetectionLoading> {
             color: Colors.pinkAccent,
             size: 40.0,
           ),
+          Spacer(),
           LinearProgressIndicator(
             value: progress,
           ),
+          Spacer(),
           Text(currentAction),
         ],
       ),

@@ -5,8 +5,6 @@ class DetectionResults extends StatelessWidget {
   int msgCount = 0, abusiveCount = 0;
 
 
-
-
   @override
   Widget build(BuildContext context) {
     // TODO: add BottomSheet
