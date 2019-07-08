@@ -25,7 +25,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
 
   void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
     DetectionResults resultsPage = new DetectionResults();
-    Map msgList = await analyzeMessages();
+    List msgList = await analyzeMessages();
     createConversation(new List<AnalyzedMessage>(), resultsPage); // msgList
     Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
   }
@@ -56,13 +56,13 @@ class DetectionLoadingState extends State<DetectionLoading> {
     return messageString;
   }
 
-  Future<Map> analyzeMessages() async {
-//    final String ip = "192.168.0.14:5000";    // matt house
-    final String ip = "172.16.8.88:5000";    // ncf
+  Future<List> analyzeMessages() async {
+    final String ip = "192.168.0.14:5000";    // matt house
+//    final String ip = "172.16.8.88:5000";    // ncf
     setState(() { currentAction = "Analyzing messages..."; });
     String cleanMessages = await getMessages();
     var response = await http.post(new Uri.http(ip, "/file"), body: cleanMessages);
-    print(json.decode(response.body));
+    print(json.decode(response.body)); // json.decode returns a map
     // TODO: Read the resulting JSON into a list of message objects
     return json.decode(response.body);
   }
