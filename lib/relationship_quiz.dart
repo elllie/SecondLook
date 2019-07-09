@@ -107,13 +107,13 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
                   // push results page
                   RelationshipQuizResults results = new RelationshipQuizResults();
                   if (score == 0) {
-                    results.result = new Result(score, "Healthy", "You got a score of zero? Don’t worry -- it’s a good thing! It sounds like your relationship is on a pretty healthy track. Maintaining healthy relationships takes some work -- keep it up! Remember that while you may have a healthy relationship, it’s possible that a friend of yours does not.", Colors.greenAccent);
+                    results.result = new Result(score, "Healthy", "You got a score of zero? Don’t worry -- it’s a good thing! It sounds like your relationship is on a pretty healthy track. Maintaining healthy relationships takes some work -- keep it up! Remember that while you may have a healthy relationship, it’s possible that a friend of yours does not.", Colors.green);
                   } else if (score < 3) {
-                    results.result = new Result(score, "Possibly unhealthy", "If you scored one or two points, you might be noticing a couple of things in your relationship that are unhealthy, but it doesn’t necessarily mean they are warning signs. It’s still a good idea to keep an eye out and make sure there isn’t an unhealthy pattern developing.\nThe best thing to do is to talk to your partner and let them know what you like and don’t like. Encourage them to do the same. Remember, communication is always important when building a healthy relationship. It’s also good to be informed so you can recognize the different types of abuse.", Colors.yellow);
+                    results.result = new Result(score, "Possibly unhealthy", "You might be noticing a couple of things in your relationship that are unhealthy, but it doesn’t necessarily mean they are warning signs. It’s still a good idea to keep an eye out and make sure there isn’t an unhealthy pattern developing.\n\nThe best thing to do is to talk to your partner and let them know what you like and don’t like. Encourage them to do the same. Communication is always important when building a healthy relationship. It’s also good to be informed so you can recognize the different types of abuse.", Colors.amber);
                   } else if (score < 5) {
-                    results.result = new Result(score, "Potentially abusive", "Scores in this range indicate you may be seeing some warning signs of an abusive relationship. Don’tignore these red flags. Something that starts small can grow much worse over time.\nNo relationship is perfect -- it takes work! But in a healthy relationship you won’t find abusive behaviors.", Colors.redAccent);
+                    results.result = new Result(score, "Potentially abusive", "Scores in this range indicate you may be seeing some warning signs of an abusive relationship. Don’tignore these red flags. Something that starts small can grow much worse over time.\n\nNo relationship is perfect -- it takes work! But in a healthy relationship you won’t find abusive behaviors.", Colors.deepOrangeAccent);
                   } else {
-                    results.result = new Result(score, "Likely abusive", "Scores in this range indicate you may be in an abusive relationship.\nRemember the most important thing is your safety -- consider making a safety plan.\nYou don’t have to deal with this alone. We can help. Chat with a trained peer advocate to learn about your different options at loveisrespect.org.", Colors.red);
+                    results.result = new Result(score, "Likely abusive", "Scores in this range indicate you may be in an abusive relationship.\n\nRemember the most important thing is your safety -- consider making a safety plan.\n\nYou don’t have to deal with this alone. We can help.", Colors.redAccent);
                   }
                   Navigator.push(context, MaterialPageRoute(builder: (context) => results));
                 }
@@ -208,7 +208,7 @@ class RelationshipQuizResults extends StatelessWidget {
         child: Column(
           children: <Widget> [
             RichText(text: TextSpan(
-                text: "Your score",
+                text: "Your score: ",
                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                 children: <TextSpan>[
                   TextSpan(
@@ -217,10 +217,10 @@ class RelationshipQuizResults extends StatelessWidget {
                   ),])),
 
             Text("${result.headline}\n",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32, color: result.color)),
             Text("${result.body}\n"),
-            Text("Visit the Resources tab to learn more.",
-                style: TextStyle(fontStyle: FontStyle.italic))
+            Text("\nVisit the Resources tab to learn more.",
+                style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black54))
           ]
         )
       )
