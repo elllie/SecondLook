@@ -92,12 +92,12 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
             Spacer(),
             Center(child: RaisedButton(
               onPressed: () {
-                print("score: $score");
                 if (answer == Answer.True && currentQuestion.pointsForYesAnswer) {
                   score += currentQuestion.pointValue;
                 } else if (answer == Answer.False && !currentQuestion.pointsForYesAnswer) {
                   score += currentQuestion.pointValue;
                 }
+                print("score: $score");
                 questions.removeFirst();
                 if (questions.isNotEmpty) {
                   setState(() {
@@ -105,6 +105,17 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
                   });
                 } else {
                   // push results page
+                  RelationshipQuizResults results = new RelationshipQuizResults();
+                  if (score == 0) {
+                    results.result = new Result(score, "Healthy", "You got a score of zero? Don’t worry -- it’s a good thing! It sounds like your relationship is on a pretty healthy track. Maintaining healthy relationships takes some work -- keep it up! Remember that while you may have a healthy relationship, it’s possible that a friend of yours does not.", Colors.greenAccent);
+                  } else if (score < 3) {
+                    results.result = new Result(score, "Possibly unhealthy", "If you scored one or two points, you might be noticing a couple of things in your relationship that are unhealthy, but it doesn’t necessarily mean they are warning signs. It’s still a good idea to keep an eye out and make sure there isn’t an unhealthy pattern developing.\nThe best thing to do is to talk to your partner and let them know what you like and don’t like. Encourage them to do the same. Remember, communication is always important when building a healthy relationship. It’s also good to be informed so you can recognize the different types of abuse.", Colors.yellow);
+                  } else if (score < 5) {
+                    results.result = new Result(score, "Potentially abusive", "Scores in this range indicate you may be seeing some warning signs of an abusive relationship. Don’tignore these red flags. Something that starts small can grow much worse over time.\nNo relationship is perfect -- it takes work! But in a healthy relationship you won’t find abusive behaviors.", Colors.redAccent);
+                  } else {
+                    results.result = new Result(score, "Likely abusive", "Scores in this range indicate you may be in an abusive relationship.\nRemember the most important thing is your safety -- consider making a safety plan.\nYou don’t have to deal with this alone. We can help. Chat with a trained peer advocate to learn about your different options at loveisrespect.org.", Colors.red);
+                  }
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => results));
                 }
               },
               child: const Text("NEXT"),
@@ -171,3 +182,49 @@ class Question {
 
 // Question radio buttons
 enum Answer { True, False }
+
+class Result {
+  int score;
+  String headline;
+  String body;
+  Color color;
+
+  Result(int scor, String headline, String body, Color color) {
+    this.score = scor;
+    this.headline = headline;
+    this.body = body;
+    this.color = color;
+  }
+}
+
+class RelationshipQuizResults extends StatelessWidget {
+  Result result;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(36.0),
+      child: Center(
+        child: Column(
+          children: <Widget> [
+            RichText(text: TextSpan(
+                text: "Your score",
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "${result.score}\n",
+                    style: TextStyle(color: result.color),
+                  ),])),
+
+            Text("${result.headline}\n",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+            Text("${result.body}\n"),
+            Text("Visit the Resources tab to learn more.",
+                style: TextStyle(fontStyle: FontStyle.italic))
+          ]
+        )
+      )
+    );
+  }
+
+}

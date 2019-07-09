@@ -117,20 +117,19 @@ class DetectionLoadingState extends State<DetectionLoading> {
 //    WidgetsBinding.instance.addPostFrameCallback(doStuff);
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(48.0),
         child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+          children: <Widget>[
           SpinKitPumpingHeart(
             color: Colors.pinkAccent,
-            size: 40.0,
+            size: 96.0,
           ),
           Spacer(),
+          Flexible(child:
           LinearProgressIndicator(
             value: progress,
-          ),
-          Spacer(),
-          Text(currentAction),
+          )),
+          Text("\n" + currentAction),
         ],
       ),
     ),
