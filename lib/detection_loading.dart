@@ -24,10 +24,10 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
-    DetectionResults resultsPage = new DetectionResults();
+//    DetectionResults resultsPage = new DetectionResults();
     List msgList = await analyzeMessages();
-    createConversation(msgList, resultsPage); // msgList
-    Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
+    createConversation(msgList, new DetectionResultsState()); // msgList
+    Navigator.push(context, MaterialPageRoute(builder: (context) => new DetectionResults()));
   }
 
   Future<String> getMessages() async {
@@ -59,21 +59,27 @@ class DetectionLoadingState extends State<DetectionLoading> {
   Future<List> analyzeMessages() async {
     final String ip = "192.168.0.14:5000";    // matt house
 //    final String ip = "172.16.8.88:5000";    // ncf
-    setState(() { currentAction = "Analyzing messages..."; });
+    setState(() {
+      progress += 0.25;
+      currentAction = "Analyzing messages..."; });
     String cleanMessages = await getMessages();
     var response = await http.post(new Uri.http(ip, "/file"), body: cleanMessages);
     print(json.decode(response.body));  // list of maps
     return json.decode(response.body);
   }
 
-  void createConversation(List analyzedMessages, DetectionResults results) {
+  void createConversation(List analyzedMessages, DetectionResultsState results) {
     List<Widget> conversation = new List<Widget>();
-    setState(() { currentAction = "Generating report..."; });
+    setState(() {
+      progress += 0.25;
+      currentAction = "Generating report..."; });
     List abusiveOnly = new List<Map>();
     for(var i = analyzedMessages.length - 1; i >= 0; i--) {
+      DateTime date = DateTime.fromMillisecondsSinceEpoch(int.parse(analyzedMessages.elementAt(i)["date"]));
+      conversation.add(Text("${date.toLocal()}", textAlign: TextAlign.center,));
       if (analyzedMessages.elementAt(i)["abusive"]) {
         abusiveOnly.add(analyzedMessages.elementAt(i));
-        results.abusiveCount++;
+        DetectionResultsState.abusiveCount++;
         conversation.add(new Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -101,9 +107,9 @@ class DetectionLoadingState extends State<DetectionLoading> {
               color: Theme.of(context).primaryColorLight),
         ));
       }
-      results.msgCount++;
+      DetectionResultsState.msgCount++;
     }
-    results.conversation = conversation;
+    DetectionResultsState.conversation = conversation;
   }
 
   @override
