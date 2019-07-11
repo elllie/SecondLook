@@ -24,9 +24,9 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   void doStuff(Duration d) async { // need the Duration so it will work in addPostFrameCallback - don't use it for anything else
-//    DetectionResults resultsPage = new DetectionResults();
+    DetectionResults resultsPage = new DetectionResults();
     List msgList = await analyzeMessages();
-    createConversation(msgList, new DetectionResultsState()); // msgList
+    createConversation(msgList, resultsPage); // msgList
     Navigator.push(context, MaterialPageRoute(builder: (context) => new DetectionResults()));
   }
 
@@ -60,7 +60,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
     final String ip = "192.168.0.14:5000";    // matt house
 //    final String ip = "172.16.8.88:5000";    // ncf
     setState(() {
-      progress += 0.25;
+      progress += 0.2;
       currentAction = "Analyzing messages..."; });
     String cleanMessages = await getMessages();
     var response = await http.post(new Uri.http(ip, "/file"), body: cleanMessages);
@@ -68,10 +68,9 @@ class DetectionLoadingState extends State<DetectionLoading> {
     return json.decode(response.body);
   }
 
-  void createConversation(List analyzedMessages, DetectionResultsState results) {
+  void createConversation(List analyzedMessages, DetectionResults results) {
     List<Widget> conversation = new List<Widget>();
     setState(() {
-      progress += 0.25;
       currentAction = "Generating report..."; });
     List abusiveOnly = new List<Map>();
     for(var i = analyzedMessages.length - 1; i >= 0; i--) {
@@ -79,7 +78,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
       conversation.add(Text("${date.toLocal()}", textAlign: TextAlign.center,));
       if (analyzedMessages.elementAt(i)["abusive"]) {
         abusiveOnly.add(analyzedMessages.elementAt(i));
-        DetectionResultsState.abusiveCount++;
+        results.abusiveCount++;
         conversation.add(new Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -107,9 +106,12 @@ class DetectionLoadingState extends State<DetectionLoading> {
               color: Theme.of(context).primaryColorLight),
         ));
       }
-      DetectionResultsState.msgCount++;
+      results.msgCount++;
+      setState(() { progress += (0.2 / (analyzedMessages.length + 2)); });
     }
-    DetectionResultsState.conversation = conversation;
+    conversation.insert(0, Text("Number of messages marked abusive"));
+    conversation.insert(1, RaisedButton(onPressed: null)); // toggle abusive only
+    results.conversation = conversation;
   }
 
   @override
