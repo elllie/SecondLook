@@ -130,7 +130,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
     }
     resultDetail.abusiveList = abusiveOnly;
     resultDetail.count = results.abusiveCount;
-    conversation.insert(0, Center(child: Text("${results.abusiveCount} of ${results.msgCount} (${results.abusiveCount / results.msgCount}%) messages marked abusive\n")));
+    conversation.insert(0, Center(child: Text("${results.abusiveCount} of ${results.msgCount} (${num.parse((results.abusiveCount / results.msgCount).toStringAsFixed(2))}%) messages marked abusive\n")));
     conversation.insert(1, Center(child: RaisedButton(onPressed: () {
       Navigator.push(context, MaterialPageRoute(builder: (context) => resultDetail));
     },
