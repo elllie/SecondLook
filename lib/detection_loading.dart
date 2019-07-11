@@ -27,7 +27,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
     DetectionResults resultsPage = new DetectionResults();
     List msgList = await analyzeMessages();
     createConversation(msgList, resultsPage); // msgList
-    Navigator.push(context, MaterialPageRoute(builder: (context) => new DetectionResults()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => resultsPage));
   }
 
   Future<String> getMessages() async {
@@ -69,15 +69,26 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   void createConversation(List analyzedMessages, DetectionResults results) {
+    DetectionDetails resultDetail = new DetectionDetails();
     List<Widget> conversation = new List<Widget>();
+    List<Widget> abusiveOnly = new List<Widget>();
     setState(() {
       currentAction = "Generating report..."; });
-    List abusiveOnly = new List<Map>();
     for(var i = analyzedMessages.length - 1; i >= 0; i--) {
       DateTime date = DateTime.fromMillisecondsSinceEpoch(int.parse(analyzedMessages.elementAt(i)["date"]));
       conversation.add(Text("${date.toLocal()}", textAlign: TextAlign.center,));
       if (analyzedMessages.elementAt(i)["abusive"]) {
-        abusiveOnly.add(analyzedMessages.elementAt(i));
+        abusiveOnly.add(Text("${date.toLocal()}", textAlign: TextAlign.center,));
+        abusiveOnly.add(new Container(
+          padding: EdgeInsets.all(16.0),
+          margin: EdgeInsets.all(16.0),
+          child: Text(analyzedMessages.elementAt(i)["body"],
+              style: TextStyle(color: Colors.white)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),
+                  topLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+              color: Colors.pinkAccent),
+        ));
         results.abusiveCount++;
         conversation.add(new Row(
             mainAxisSize: MainAxisSize.min,
@@ -109,8 +120,14 @@ class DetectionLoadingState extends State<DetectionLoading> {
       results.msgCount++;
       setState(() { progress += (0.2 / (analyzedMessages.length + 2)); });
     }
-    conversation.insert(0, Text("Number of messages marked abusive"));
-    conversation.insert(1, RaisedButton(onPressed: null)); // toggle abusive only
+    resultDetail.abusiveList = abusiveOnly;
+    resultDetail.count = results.abusiveCount;
+    conversation.insert(0, Center(child: Text("${results.abusiveCount} of ${results.msgCount} (${results.abusiveCount / results.msgCount}%) messages marked abusive\n")));
+    conversation.insert(1, Center(child: RaisedButton(onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => resultDetail));
+    },
+    child: Text("MORE INFO"), color: Colors.pinkAccent, textColor: Colors.white)));
+    conversation.insert(2, Text("\n"));
     results.conversation = conversation;
   }
 
