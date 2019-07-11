@@ -74,6 +74,14 @@ class DetectionLoadingState extends State<DetectionLoading> {
     List<Widget> abusiveOnly = new List<Widget>();
     setState(() {
       currentAction = "Generating report..."; });
+
+    abusiveOnly.add(Center(child: Text("Context matters.\n", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),)));
+    abusiveOnly.add(Text('Each text message on this page has been labeled as abusive by our detection algorithm.\n\nThe algorithm only analyzes one message at a time. It is your job to look at the whole story.\n\nThough our program is written to be accurate, it is NOT a final judgement on the healthiness of your relationship. It is only a tool to aid your personal decision.\n\nIf you need the support of a human, the Resources tab can help.\n'));
+    abusiveOnly.add(Center(child: FlatButton(onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => results));
+    }, textColor: Colors.pinkAccent, child: Text("< Back to all results"))));
+    abusiveOnly.add(Text(" "));
+
     for(var i = analyzedMessages.length - 1; i >= 0; i--) {
       DateTime date = DateTime.fromMillisecondsSinceEpoch(int.parse(analyzedMessages.elementAt(i)["date"]));
       conversation.add(Text("${date.toLocal()}", textAlign: TextAlign.center,));
