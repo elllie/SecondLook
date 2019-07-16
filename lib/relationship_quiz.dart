@@ -9,25 +9,8 @@ class RelationshipQuizHome extends StatelessWidget {
         padding: EdgeInsets.all(36.0),
         child: Center(child: Column(
             children: <Widget>[
-          RichText(
-              text: TextSpan(
-                  text: "\"   ",
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pinkAccent,
-                  ),
-                  // TODO: Add a custom font to make the quotes prettier.
-                  children: <TextSpan>[
-                TextSpan(
-                    text: "Am I in an abusive relationship?",
-                    style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)),
-                TextSpan(text: "   \"")
-              ])),
-          Text("\nThis quiz can help you find out.\n",
+          Text("Are you in a healthy relationship?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0), textAlign: TextAlign.center,),
+          Text("\n    Everyone deserves to be in a safe and healthy relationship. Do you know if your relationship is healthy? Answer yes or no to the following questions to find out. \n",
               style: TextStyle(fontSize: 18)),
           RaisedButton(
             onPressed: () {
@@ -51,7 +34,6 @@ class RelationshipQuiz extends StatefulWidget {
 class RelationshipQuizState extends State<RelationshipQuiz> {
   ListQueue<Question> questions = initQuestions();
   Question currentQuestion = initQuestions().first;
-  Answer answer = Answer.True;
   int score = 0;
 
   @override
@@ -64,7 +46,7 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
           children: <Widget>[
             RichText(text: TextSpan(
               text: "QUESTION ${currentQuestion.index} / 26  •  ",
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54, fontSize: 16.0),
               children: <TextSpan>[
                 TextSpan(
                   text: "The person I'm with...\n",
@@ -77,26 +59,11 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
                   color: Colors.black87,
                   fontSize: 32,
                   fontWeight: FontWeight.bold)),
-            RadioListTile<Answer>(
-              title: const Text("True"),
-              value: Answer.True,
-              groupValue: answer,
-              onChanged: (Answer value) { setState(() { answer = value; }); },
-            ),
-            RadioListTile<Answer>(
-              title: const Text("False"),
-              value: Answer.False,
-              groupValue: answer,
-              onChanged: (Answer value) { setState(() { answer = value; }); },
-            ),
-            Spacer(),
-            Center(child: RaisedButton(
+            Spacer(), Spacer(),
+            Row(children: <Widget>[ RaisedButton(
               onPressed: () {
-                if (answer == Answer.True && currentQuestion.pointsForYesAnswer) {
+                if (currentQuestion.pointsForYesAnswer)
                   score += currentQuestion.pointValue;
-                } else if (answer == Answer.False && !currentQuestion.pointsForYesAnswer) {
-                  score += currentQuestion.pointValue;
-                }
                 print("score: $score");
                 questions.removeFirst();
                 if (questions.isNotEmpty) {
@@ -118,11 +85,40 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => results));
                 }
               },
-              child: const Text("NEXT"),
+              child: const Text("YES"),
               textColor: Colors.white,
               color: Colors.pinkAccent,
-            ),),
-            Spacer(),
+            ), Spacer(),
+              RaisedButton(
+                onPressed: () {
+                  if (!currentQuestion.pointsForYesAnswer)
+                    score += currentQuestion.pointValue;
+                  print("score: $score");
+                  questions.removeFirst();
+                  if (questions.isNotEmpty) {
+                    setState(() {
+                      currentQuestion = questions.first;
+                    });
+                  } else {
+                    // push results page
+                    RelationshipQuizResults results = new RelationshipQuizResults();
+                    if (score == 0) {
+                      results.result = new Result(score, "Healthy", "You got a score of zero? Don’t worry -- it’s a good thing! It sounds like your relationship is on a pretty healthy track. Maintaining healthy relationships takes some work -- keep it up! Remember that while you may have a healthy relationship, it’s possible that a friend of yours does not.", Colors.green);
+                    } else if (score < 3) {
+                      results.result = new Result(score, "Possibly unhealthy", "You might be noticing a couple of things in your relationship that are unhealthy, but it doesn’t necessarily mean they are warning signs. It’s still a good idea to keep an eye out and make sure there isn’t an unhealthy pattern developing.\n\nThe best thing to do is to talk to your partner and let them know what you like and don’t like. Encourage them to do the same. Communication is always important when building a healthy relationship. It’s also good to be informed so you can recognize the different types of abuse.", Colors.amber);
+                    } else if (score < 5) {
+                      results.result = new Result(score, "Potentially abusive", "Scores in this range indicate you may be seeing some warning signs of an abusive relationship. Don’tignore these red flags. Something that starts small can grow much worse over time.\n\nNo relationship is perfect -- it takes work! But in a healthy relationship you won’t find abusive behaviors.", Colors.deepOrangeAccent);
+                    } else {
+                      results.result = new Result(score, "Likely abusive", "Scores in this range indicate you may be in an abusive relationship.\n\nRemember the most important thing is your safety -- consider making a safety plan.\n\nYou don’t have to deal with this alone. We can help.", Colors.redAccent);
+                    }
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => results));
+                  }
+                },
+                child: const Text("NO"),
+                textColor: Colors.white,
+                color: Colors.pinkAccent,
+              ),]),
+        Text("\n"),
 //          ],)),
           LinearProgressIndicator(
             value: (currentQuestion.index - 1) / 26,
@@ -207,14 +203,8 @@ class RelationshipQuizResults extends StatelessWidget {
       child: Center(
         child: Column(
           children: <Widget> [
-            RichText(text: TextSpan(
-                text: "Your score: ",
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: "${result.score}\n",
-                    style: TextStyle(color: result.color),
-                  ),])),
+            Text("Your score: ${result.score} / 100\n",
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
 
             Text("${result.headline}\n",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32, color: result.color)),

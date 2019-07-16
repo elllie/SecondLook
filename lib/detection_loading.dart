@@ -57,8 +57,8 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   Future<List> analyzeMessages() async {
-    final String ip = "192.168.0.14:5000";    // matt house
-//    final String ip = "172.16.8.88:5000";    // ncf
+//    final String ip = "192.168.0.14:5000";    // matt house
+    final String ip = "172.16.8.96:5000";    // ncf
     setState(() {
       progress += 0.2;
       currentAction = "Analyzing messages..."; });
@@ -130,7 +130,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
     }
     resultDetail.abusiveList = abusiveOnly;
     resultDetail.count = results.abusiveCount;
-    conversation.insert(0, Center(child: Text("${results.abusiveCount} of ${results.msgCount} (${num.parse((results.abusiveCount / results.msgCount).toStringAsFixed(2))}%) messages marked abusive\n")));
+    conversation.insert(0, Center(child: Text("${results.abusiveCount} of ${results.msgCount} (${num.parse(((results.abusiveCount / results.msgCount) * 100).toStringAsFixed(2))}%) messages marked abusive\n")));
     conversation.insert(1, Center(child: RaisedButton(onPressed: () {
       Navigator.push(context, MaterialPageRoute(builder: (context) => resultDetail));
     },
