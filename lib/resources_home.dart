@@ -12,6 +12,112 @@ class _ResourcesHomeState extends State<ResourcesHome> {
   Position _position; // User's current location.
   Placemark _placemark;
   String _location;
+  List<Widget> places = new List<Widget>();
+
+  @override
+  void initState() {
+    super.initState();
+    places.add(Card(child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const ListTile(
+          leading: Icon(Icons.album), // image view
+          title: Text('\nOffice of Women\'s Health Helpline\n'),
+          subtitle: Text('phone: 1-800-994-9662 9a—6p ET Mon — Fri\nweb: https://www.womenshealth.gov/relationships-and-safety/get-help'),
+        ),
+        ButtonTheme.bar( // make buttons use the appropriate styles for cards
+          child: ButtonBar(
+            children: <Widget>[
+              FlatButton(
+                child: const Text('CALL'),
+                onPressed: () { /* ... */ },
+              ),
+              FlatButton(
+                child: const Text('VISIT WEBSITE'),
+                onPressed: () { /* ... */ },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    ),);
+    places.add(Card(child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const ListTile(
+          leading: Icon(Icons.album), // image view
+          title: Text('\nNational Domestic Violence Hotline\n'),
+          subtitle: Text('phone: 1-800-799-SAFE (7233) 24/7\nweb: http://www.thehotline.org/help/'),
+        ),
+        ButtonTheme.bar( // make buttons use the appropriate styles for cards
+          child: ButtonBar(
+            children: <Widget>[
+              FlatButton(
+                child: const Text('CALL'),
+                onPressed: () { /* ... */ },
+              ),
+              FlatButton(
+                child: const Text('VISIT WEBSITE'),
+                onPressed: () { /* ... */ },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    ),);
+    places.add(Card(child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const ListTile(
+          leading: Icon(Icons.album), // image view
+          title: Text('\nNational Dating Abuse Hotline\n'),
+          subtitle: Text('phone: 1-866-331-9474 24/7\nweb: http://www.loveisrespect.org/'),
+        ),
+        ButtonTheme.bar( // make buttons use the appropriate styles for cards
+          child: ButtonBar(
+            children: <Widget>[
+              FlatButton(
+                child: const Text('CALL'),
+                onPressed: () { /* ... */ },
+              ),
+              FlatButton(
+                child: const Text('VISIT WEBSITE'),
+                onPressed: () { /* ... */ },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    ),);
+    places.add(Card(child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const ListTile(
+          leading: Icon(Icons.album), // image view
+          title: Text('\nNational Sexual Assault Hotline\n'),
+          subtitle: Text('phone: 1-800-656-4673 24/7\nweb: https://www.rainn.org/get-help (live chat available)'),
+        ),
+        ButtonTheme.bar( // make buttons use the appropriate styles for cards
+          child: ButtonBar(
+            children: <Widget>[
+              FlatButton(
+                child: const Text('CALL'),
+                onPressed: () { /* ... */ },
+              ),
+              FlatButton(
+                child: const Text('VISIT WEBSITE'),
+                onPressed: () { /* ... */ },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    ),);
+  }
 
   @override
   void dispose() {
@@ -65,6 +171,8 @@ class _ResourcesHomeState extends State<ResourcesHome> {
                       )
                     ],
                   )),
+            Text(" "),
+            Expanded(child: ListView(children: places))
             ]));
   }
 }
