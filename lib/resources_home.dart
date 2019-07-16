@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class ResourcesHome extends StatefulWidget {
@@ -30,11 +31,11 @@ class _ResourcesHomeState extends State<ResourcesHome> {
             children: <Widget>[
               FlatButton(
                 child: const Text('CALL'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("tel://+18009949662"); },
               ),
               FlatButton(
                 child: const Text('VISIT WEBSITE'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("https://www.womenshealth.gov/relationships-and-safety/get-help"); },
               ),
             ],
           ),
@@ -55,11 +56,11 @@ class _ResourcesHomeState extends State<ResourcesHome> {
             children: <Widget>[
               FlatButton(
                 child: const Text('CALL'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("tel://+18007997233"); },
               ),
               FlatButton(
                 child: const Text('VISIT WEBSITE'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("http://www.thehotline.org/help/"); },
               ),
             ],
           ),
@@ -80,11 +81,11 @@ class _ResourcesHomeState extends State<ResourcesHome> {
             children: <Widget>[
               FlatButton(
                 child: const Text('CALL'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("tel://+18663319474"); },
               ),
               FlatButton(
                 child: const Text('VISIT WEBSITE'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("http://www.loveisrespect.org/"); },
               ),
             ],
           ),
@@ -105,11 +106,11 @@ class _ResourcesHomeState extends State<ResourcesHome> {
             children: <Widget>[
               FlatButton(
                 child: const Text('CALL'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("tel://+18006564673"); },
               ),
               FlatButton(
                 child: const Text('VISIT WEBSITE'),
-                onPressed: () { /* ... */ },
+                onPressed: () { launch("https://www.rainn.org/get-help"); },
               ),
             ],
           ),
