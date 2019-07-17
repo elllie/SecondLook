@@ -22,7 +22,8 @@ class _ResourcesHomeState extends State<ResourcesHome> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const ListTile(
-          leading: Icon(Icons.album), // image view
+          leading: Image(image: AssetImage('assets/OWH_Logo-URL_RGB_2C.png'),
+          fit: BoxFit.contain),
           title: Text('\nOffice of Women\'s Health Helpline\n'),
           subtitle: Text('phone: 1-800-994-9662 9a—6p ET Mon — Fri\nweb: https://www.womenshealth.gov/relationships-and-safety/get-help'),
         ),
@@ -47,7 +48,8 @@ class _ResourcesHomeState extends State<ResourcesHome> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const ListTile(
-          leading: Icon(Icons.album), // image view
+          leading: Image(image: AssetImage('assets/hotline-logo4.png'),
+              fit: BoxFit.contain),
           title: Text('\nNational Domestic Violence Hotline\n'),
           subtitle: Text('phone: 1-800-799-SAFE (7233) 24/7\nweb: http://www.thehotline.org/help/'),
         ),
@@ -72,7 +74,8 @@ class _ResourcesHomeState extends State<ResourcesHome> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const ListTile(
-          leading: Icon(Icons.album), // image view
+          leading: Image(image: AssetImage('assets/lir20-logo-1.png'),
+              fit: BoxFit.contain),
           title: Text('\nNational Dating Abuse Hotline\n'),
           subtitle: Text('phone: 1-866-331-9474 24/7\nweb: http://www.loveisrespect.org/'),
         ),
@@ -97,7 +100,8 @@ class _ResourcesHomeState extends State<ResourcesHome> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const ListTile(
-          leading: Icon(Icons.album), // image view
+          leading: Image(image: AssetImage('assets/RAINN_Logo_25th.png'),
+              fit: BoxFit.contain),
           title: Text('\nNational Sexual Assault Hotline\n'),
           subtitle: Text('phone: 1-800-656-4673 24/7\nweb: https://www.rainn.org/get-help (live chat available)'),
         ),
