@@ -46,15 +46,26 @@ class AwarenessRelationshipSpectrum extends StatelessWidget {
             Center(child: Text("STRUGGLES FOR CONTROL", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),)),
             Center(child: Text("INCONSIDERATE BEHAVIOR", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),)),
           ],)),
-      // todo abusive section
+      // abusive section
       Container(decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter, end: Alignment.bottomCenter,
               colors: [ Colors.purple, Colors.red[800]
               ])),
           child: Column(children: <Widget>[
-            // todo title
-            // todo list of things
+            Text("\nAbusive relationships are based on an imbalance of power and control.\n",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
+            Text("\nYOne person is making all of the decisions — about sexual choices, friend groups, boundaries, even what’s true and what's not. You spend all of your time together and feel like you can't talk to other people, especially about what's really happening in your relationship.\n",
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+            Center(child: Row(children: <Widget>[
+              Text("ACCUSATIONS", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),),
+              Text("MANIPULATION", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),),
+            ],)),
+            Center(child: Row(children: <Widget>[
+              Text("ISOLATION", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),),
+              Text("PRESSURE", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),)
+            ],)),
+            Center(child: Text("BLAME SHIFTING", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white),)),
           ],))
     ],);
   }
