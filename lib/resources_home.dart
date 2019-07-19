@@ -14,10 +14,12 @@ class _ResourcesHomeState extends State<ResourcesHome> {
   Placemark _placemark;
   String _location;
   List<Widget> places = new List<Widget>();
+  List<Widget> defaultPlaces;
 
   @override
   void initState() {
     super.initState();
+    print("initxtzte");
     places.add(Card(child: Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -122,6 +124,33 @@ class _ResourcesHomeState extends State<ResourcesHome> {
       ],
     ),
     ),);
+    places.add(Card(child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const ListTile(
+          leading: Image(image: AssetImage('assets/phone--banner.png'),
+              fit: BoxFit.contain),
+          title: Text('\nSuicide Prevention Lifeline\n'),
+          subtitle: Text('phone: 1-800-273-8255 24/7\nweb: https://suicidepreventionlifeline.org/ (live chat available)'),
+        ),
+        ButtonTheme.bar( // make buttons use the appropriate styles for cards
+          child: ButtonBar(
+            children: <Widget>[
+              FlatButton(
+                child: const Text('CALL'),
+                onPressed: () { launch("tel://+18002738255"); },
+              ),
+              FlatButton(
+                child: const Text('VISIT WEBSITE'),
+                onPressed: () { launch("https://suicidepreventionlifeline.org/"); },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    ),);
+    defaultPlaces = places;
   }
 
   @override
@@ -156,6 +185,91 @@ class _ResourcesHomeState extends State<ResourcesHome> {
                               _position = _placemark.position;
                               print("location: " + _position.latitude.toString() + " lat, " + _position.longitude.toString() + " long");
                               print("named location: " + _location);
+                              if (_location.contains("Sarasota") || _location.contains("Manatee") || _location.contains("Bradenton")) {
+                                print("a\na\nhoooooooooooonh\nh");
+                                setState(() {
+                                  print("set state");
+                                  places = new List<Widget>();
+                                  places.insert(0, Card(child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      const ListTile(
+                                        leading: Image(image: AssetImage('assets/sparcc.png'),
+                                            fit: BoxFit.contain),
+                                        title: Text('\nSafe Place and Rape Crisis Center\n'),
+                                        subtitle: Text('phone: (941) 365-1976 24/7\nweb: https://www.sparcc.net/'),
+                                      ),
+                                      ButtonTheme.bar( // make buttons use the appropriate styles for cards
+                                        child: ButtonBar(
+                                          children: <Widget>[
+                                            FlatButton(
+                                              child: const Text('CALL'),
+                                              onPressed: () { launch("tel://+19413651976"); },
+                                            ),
+                                            FlatButton(
+                                              child: const Text('VISIT WEBSITE'),
+                                              onPressed: () { launch("https://www.sparcc.net/"); },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ),);
+                                });
+                                places.add(Card(child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    const ListTile(
+                                      leading: Icon(Icons.favorite, color: Color(0xFF1976D2)),
+                                      title: Text('\nNCF-USFSM Counseling and Wellness Center\n'),
+                                      subtitle: Text('phone: 941-487-4254 M-F 8-5\nweb: https://www.ncf.edu/cwc/'),
+                                    ),
+                                    ButtonTheme.bar( // make buttons use the appropriate styles for cards
+                                      child: ButtonBar(
+                                        children: <Widget>[
+                                          FlatButton(
+                                            child: const Text('CALL'),
+                                            onPressed: () { launch("tel://+19414874254"); },
+                                          ),
+                                          FlatButton(
+                                            child: const Text('VISIT WEBSITE'),
+                                            onPressed: () { launch("https://www.ncf.edu/cwc/"); },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ),);
+                                places.add(Card(child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    const ListTile(
+                                      leading: Icon(Icons.favorite, color: Color(0xFF1976D2)),
+                                      title: Text('\nNew College of Florida Victims Advocate\n'),
+                                      subtitle: Text('phone: 941-504-8599\nweb: https://www.ncf.edu/campus-life/title-ix/'),
+                                    ),
+                                    ButtonTheme.bar( // make buttons use the appropriate styles for cards
+                                      child: ButtonBar(
+                                        children: <Widget>[
+                                          FlatButton(
+                                            child: const Text('CALL'),
+                                            onPressed: () { launch("tel://+19415048599"); },
+                                          ),
+                                          FlatButton(
+                                            child: const Text('VISIT WEBSITE'),
+                                            onPressed: () { launch("https://www.ncf.edu/campus-life/title-ix/"); },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ),);
+                              } else {
+                                places = defaultPlaces;
+                              }
                             }
                           },
                         ),
