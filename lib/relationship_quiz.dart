@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:collection';
+import 'package:url_launcher/url_launcher.dart';
 
 class RelationshipQuizHome extends StatelessWidget {
   @override
@@ -203,14 +204,16 @@ class RelationshipQuizResults extends StatelessWidget {
       child: Center(
         child: Column(
           children: <Widget> [
-            Text("Your score: ${result.score} / 100\n",
+            Text("Your score: ${result.score} / 100",
                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
-
+            FlatButton( textColor: Colors.black54,
+                onPressed: () { launch('https://www.loveisrespect.org/wp-content/uploads/2017/07/HR-Quiz-final.pdf'); },
+                child: Text("VIEW FULL SCALE")),
             Text("${result.headline}\n",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32, color: result.color)),
             Text("${result.body}\n"),
-            Text("\nVisit the Resources tab to learn more.",
-                style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black54))
+            Text("\nVisit the Resources tab for assistance.",
+                style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black54)),
           ]
         )
       )
