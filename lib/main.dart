@@ -43,14 +43,20 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text('SecondLook'),
       ),
-      body: Text('SecondLook'),
+      body: Column(children: <Widget>[
+        Text(" "),
+        Image(image: AssetImage('assets/relationship-spectrum-card-1.png')),
+        Center(child: Text('\nWelcome to SecondLook\n', style: Theme.of(context).textTheme.title)),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 32.0), child: Text("Here you can learn about dating abuse and the factors that make a relationship healthy, detect abusive patterns in your SMS inbox, and find dating support in your area.\n\nOpen the menu on the left to get started.", textAlign: TextAlign.left,)),
+      ],),
       drawer: Drawer(child: ListView(
         padding: EdgeInsets.all(0),
         children: <Widget>[
           DrawerHeader(
-            child: Text('Drawer Header'),
+            child: Text('SecondLook', style: TextStyle(color: Colors.white)),
             decoration: BoxDecoration(
-              color: Colors.cyan,
+                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
+                    colors: <Color>[Colors.cyan, Colors.pinkAccent])
             ),
           ),
           Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
