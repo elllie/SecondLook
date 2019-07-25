@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import "relationship_quiz.dart";
+import "resources_home.dart";
+import "detection_home.dart";
 
 class AwarenessRelationshipSpectrum extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: <Widget>[
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('SecondLook'),
+    ),
+    body: ListView(children: <Widget>[
       Text("\nThe Relationship Spectrum\n", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0),
         textAlign: TextAlign.center,),
       Text("All relationships exist on a spectrum from healthy to abusive with unhealthy somewhere in the middle\n",
@@ -104,7 +111,54 @@ class AwarenessRelationshipSpectrum extends StatelessWidget {
             ],)),
             Center(child: Text("BLAME SHIFTING\n", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),)),
           ],))
-    ],);
+    ],),
+      drawer: Drawer(child: ListView(
+        padding: EdgeInsets.all(0),
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('Drawer Header'),
+            decoration: BoxDecoration(
+              color: Colors.cyan,
+            ),
+          ),
+          Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+          ListTile(
+            title: Text('The relationship spectrum'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AwarenessRelationshipSpectrum()));
+            },
+          ),
+          ListTile(
+            title: Text('Dating abuse statistics'),
+            onTap: () {
+              print("fax");
+            },
+          ),
+          ListTile(title: Text('Relationship quiz'), onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RelationshipQuizHome()));
+          },),
+          Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+          ListTile(title: Text('Analyze messages'), onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetectionHome()));
+          },),
+          Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+          ListTile(title: Text('In your area'), onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ResourcesHome()));
+          },),
+        ],
+      )),);
   }
 
 }

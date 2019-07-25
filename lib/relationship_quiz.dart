@@ -1,12 +1,66 @@
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'package:url_launcher/url_launcher.dart';
+import "awareness_relationship_spectrum.dart";
+import "detection_home.dart";
+import "resources_home.dart";
 
 class RelationshipQuizHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Padding(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('SecondLook'),
+    ),
+        drawer: Drawer(child: ListView(
+          padding: EdgeInsets.all(0),
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.cyan,
+              ),
+            ),
+            Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(
+              title: Text('The relationship spectrum'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AwarenessRelationshipSpectrum()));
+              },
+            ),
+            ListTile(
+              title: Text('Dating abuse statistics'),
+              onTap: () {
+                print("fax");
+              },
+            ),
+            ListTile(title: Text('Relationship quiz'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RelationshipQuizHome()));
+            },),
+            Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('Analyze messages'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetectionHome()));
+            },),
+            Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('In your area'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResourcesHome()));
+            },),
+          ],
+        )),
+    body: Padding(
         padding: EdgeInsets.all(36.0),
         child: Center(child: Column(
             children: <Widget>[
@@ -22,7 +76,7 @@ class RelationshipQuizHome extends StatelessWidget {
             color: Colors.pinkAccent,
             child: const Text("START QUIZ"),
           )
-        ])));
+        ]))));
   }
 }
 
@@ -39,7 +93,45 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('SecondLook'),
+    ),
+    drawer: Drawer(child: ListView(
+    padding: EdgeInsets.all(0),
+    children: <Widget>[
+    DrawerHeader(
+    child: Text('Drawer Header'),
+    decoration: BoxDecoration(
+    color: Colors.cyan,
+    ),
+    ),
+    Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(
+    title: Text('The relationship spectrum'),
+    onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => AwarenessRelationshipSpectrum()));
+    },
+    ),
+    ListTile(
+    title: Text('Dating abuse statistics'),
+    onTap: () {
+    // Update the state of the app.
+    // ...
+    },
+    ),
+    ListTile(title: Text('Relationship quiz'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => RelationshipQuizHome()));
+    },)
+    ],
+    )),
+    body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -124,7 +216,7 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
           LinearProgressIndicator(
             value: (currentQuestion.index - 1) / 26,
           )
-      ]));
+      ])));
   }
 
   static ListQueue<Question> initQuestions() {
@@ -199,7 +291,45 @@ class RelationshipQuizResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('SecondLook'),
+    ),
+    drawer: Drawer(child: ListView(
+    padding: EdgeInsets.all(0),
+    children: <Widget>[
+    DrawerHeader(
+    child: Text('Drawer Header'),
+    decoration: BoxDecoration(
+    color: Colors.cyan,
+    ),
+    ),
+    Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(
+    title: Text('The relationship spectrum'),
+    onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => AwarenessRelationshipSpectrum()));
+    },
+    ),
+    ListTile(
+    title: Text('Dating abuse statistics'),
+    onTap: () {
+    // Update the state of the app.
+    // ...
+    },
+    ),
+    ListTile(title: Text('Relationship quiz'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => RelationshipQuizHome()));
+    },)
+    ],
+    )),
+    body:Padding(
       padding: EdgeInsets.all(36.0),
       child: Center(
         child: Column(
@@ -217,7 +347,7 @@ class RelationshipQuizResults extends StatelessWidget {
           ]
         )
       )
-    );
+    ));
   }
 
 }

@@ -26,37 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.cyan,
       ),
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('SecondLook'),
-            bottom: TabBar(
-              tabs: [
-                Tab(text: 'AWARENESS'),
-                Tab(text: 'DETECTION'),
-                Tab(text: 'RESOURCES'),
-              ],
-            ),
-          ),
-          body: TabBarView(children: [
-//            AwarenessHome(),
-            Navigator(
-              initialRoute: '/awareness',
-              onGenerateRoute: (routeSettings) {
-                return MaterialPageRoute(builder: (context) => AwarenessHome());
-              },
-            ),
-            Navigator(
-              initialRoute: '/detection',
-              onGenerateRoute: (routeSettings) {
-                return MaterialPageRoute(builder: (context) => DetectionHome());
-              },
-            ),
-            ResourcesHome(),
-          ]),
-        ),
-      ),
+      home: new Home(),
       routes: <String, WidgetBuilder>{
         '/awareness': (BuildContext context) => AwarenessHome(),
         '/detection': (BuildContext context) => DetectionHome(),
@@ -64,6 +34,66 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('SecondLook'),
+      ),
+      body: Text('SecondLook'),
+      drawer: Drawer(child: ListView(
+        padding: EdgeInsets.all(0),
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('Drawer Header'),
+            decoration: BoxDecoration(
+              color: Colors.cyan,
+            ),
+          ),
+          Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+          ListTile(
+            title: Text('The relationship spectrum'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AwarenessRelationshipSpectrum()));
+            },
+          ),
+          ListTile(
+            title: Text('Dating abuse statistics'),
+            onTap: () {
+              print("fax");
+            },
+          ),
+          ListTile(title: Text('Relationship quiz'), onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RelationshipQuizHome()));
+          },),
+          Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+          ListTile(title: Text('Analyze messages'), onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetectionHome()));
+          },),
+          Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+          ListTile(title: Text('In your area'), onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ResourcesHome()));
+          },),
+        ],
+      )),
+    );
+  }
+
 }
 
 class SetIP extends StatelessWidget {

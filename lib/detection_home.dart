@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:contact_picker/contact_picker.dart';
 import "detection_loading.dart";
+import "awareness_relationship_spectrum.dart";
+import "relationship_quiz.dart";
+import "resources_home.dart";
 
 
 class DetectionHome extends StatefulWidget {
@@ -22,7 +25,58 @@ class _DetectionHomeState extends State<DetectionHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('SecondLook'),
+    ),
+        drawer: Drawer(child: ListView(
+          padding: EdgeInsets.all(0),
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.cyan,
+              ),
+            ),
+            Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(
+              title: Text('The relationship spectrum'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AwarenessRelationshipSpectrum()));
+              },
+            ),
+            ListTile(
+              title: Text('Dating abuse statistics'),
+              onTap: () {
+                print("fax");
+              },
+            ),
+            ListTile(title: Text('Relationship quiz'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RelationshipQuizHome()));
+            },),
+            Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('Analyze messages'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetectionHome()));
+            },),
+            Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('In your area'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResourcesHome()));
+            },),
+          ],
+        )),
+    body: Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +135,7 @@ class _DetectionHomeState extends State<DetectionHome> {
           ),
         ],
       ),
-    );
+    ));
   }
 
 }
