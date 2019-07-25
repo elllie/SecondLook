@@ -17,9 +17,10 @@ class RelationshipQuizHome extends StatelessWidget {
           padding: EdgeInsets.all(0),
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text('SecondLook', style: TextStyle(color: Colors.white)),
               decoration: BoxDecoration(
-                color: Colors.cyan,
+                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
+                colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
             ),
             Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
@@ -101,9 +102,10 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
     padding: EdgeInsets.all(0),
     children: <Widget>[
     DrawerHeader(
-    child: Text('Drawer Header'),
+    child: Text('SecondLook', style: TextStyle(color: Colors.white)),
     decoration: BoxDecoration(
-    color: Colors.cyan,
+    gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
+    colors: <Color>[Colors.cyan, Colors.pinkAccent])
     ),
     ),
     Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
@@ -119,8 +121,7 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
     ListTile(
     title: Text('Dating abuse statistics'),
     onTap: () {
-    // Update the state of the app.
-    // ...
+    print("fax");
     },
     ),
     ListTile(title: Text('Relationship quiz'), onTap: () {
@@ -128,7 +129,21 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
     context,
     MaterialPageRoute(
     builder: (context) => RelationshipQuizHome()));
-    },)
+    },),
+    Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(title: Text('Analyze messages'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => DetectionHome()));
+    },),
+    Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(title: Text('In your area'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => ResourcesHome()));
+    },),
     ],
     )),
     body: Padding(
@@ -295,40 +310,54 @@ class RelationshipQuizResults extends StatelessWidget {
         appBar: AppBar(
         title: Text('SecondLook'),
     ),
-    drawer: Drawer(child: ListView(
-    padding: EdgeInsets.all(0),
-    children: <Widget>[
-    DrawerHeader(
-    child: Text('Drawer Header'),
-    decoration: BoxDecoration(
-    color: Colors.cyan,
-    ),
-    ),
-    Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
-    ListTile(
-    title: Text('The relationship spectrum'),
-    onTap: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) => AwarenessRelationshipSpectrum()));
-    },
-    ),
-    ListTile(
-    title: Text('Dating abuse statistics'),
-    onTap: () {
-    // Update the state of the app.
-    // ...
-    },
-    ),
-    ListTile(title: Text('Relationship quiz'), onTap: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) => RelationshipQuizHome()));
-    },)
-    ],
-    )),
+        drawer: Drawer(child: ListView(
+          padding: EdgeInsets.all(0),
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('SecondLook', style: TextStyle(color: Colors.white)),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
+                      colors: <Color>[Colors.cyan, Colors.pinkAccent])
+              ),
+            ),
+            Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(
+              title: Text('The relationship spectrum'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AwarenessRelationshipSpectrum()));
+              },
+            ),
+            ListTile(
+              title: Text('Dating abuse statistics'),
+              onTap: () {
+                print("fax");
+              },
+            ),
+            ListTile(title: Text('Relationship quiz'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RelationshipQuizHome()));
+            },),
+            Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('Analyze messages'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetectionHome()));
+            },),
+            Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('In your area'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResourcesHome()));
+            },),
+          ],
+        )),
     body:Padding(
       padding: EdgeInsets.all(36.0),
       child: Center(

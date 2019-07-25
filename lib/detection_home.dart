@@ -33,9 +33,10 @@ class _DetectionHomeState extends State<DetectionHome> {
           padding: EdgeInsets.all(0),
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text('SecondLook', style: TextStyle(color: Colors.white)),
               decoration: BoxDecoration(
-                color: Colors.cyan,
+                  gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
+                      colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
             ),
             Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
