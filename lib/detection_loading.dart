@@ -5,6 +5,11 @@ import 'package:sms_maintained/sms.dart';
 import "detection_results.dart";
 import 'package:http/http.dart' as http;
 
+import "awareness_relationship_spectrum.dart";
+import "relationship_quiz.dart";
+import "resources_home.dart";
+import "detection_home.dart";
+
 class DetectionLoadingState extends State<DetectionLoading> {
   static String phoneNumber;
   static String ip;
@@ -58,7 +63,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   Future<List> analyzeMessages() async {
-//    final String ip = "192.168.0.14:5000";    // matt house
+    final String ip = "192.168.0.5:5000";    // matt house
 //    final String ip = "172.16.8.96:5000";    // ncf
     setState(() {
       progress += 0.2;
@@ -152,7 +157,58 @@ class DetectionLoadingState extends State<DetectionLoading> {
   @override
   Widget build(BuildContext context) {
 //    WidgetsBinding.instance.addPostFrameCallback(doStuff);
-    return Center(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('SecondLook'),
+    ),
+    drawer: Drawer(child: ListView(
+    padding: EdgeInsets.all(0),
+    children: <Widget>[
+    DrawerHeader(
+    child: Text('Drawer Header'),
+    decoration: BoxDecoration(
+    color: Colors.cyan,
+    ),
+    ),
+    Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(
+    title: Text('The relationship spectrum'),
+    onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => AwarenessRelationshipSpectrum()));
+    },
+    ),
+    ListTile(
+    title: Text('Dating abuse statistics'),
+    onTap: () {
+    print("fax");
+    },
+    ),
+    ListTile(title: Text('Relationship quiz'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => RelationshipQuizHome()));
+    },),
+    Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(title: Text('Analyze messages'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => DetectionHome()));
+    },),
+    Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+    ListTile(title: Text('In your area'), onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => ResourcesHome()));
+    },),
+    ],
+    )),
+    body: Center(
       child: Padding(
         padding: EdgeInsets.all(48.0),
         child: Column(
@@ -168,9 +224,9 @@ class DetectionLoadingState extends State<DetectionLoading> {
           )),
           Text("\n" + currentAction),
         ],
-      ),
     ),
-    );
+    ),
+    ));
   }
 }
 
