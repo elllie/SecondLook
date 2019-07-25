@@ -250,7 +250,7 @@ class _ResourcesHomeState extends State<ResourcesHome> {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                print("fax");
+                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
               },
             ),
             ListTile(

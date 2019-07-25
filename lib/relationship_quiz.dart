@@ -5,6 +5,7 @@ import "awareness_relationship_spectrum.dart";
 import "detection_home.dart";
 import "resources_home.dart";
 
+
 class RelationshipQuizHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class RelationshipQuizHome extends StatelessWidget {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                print("fax");
+                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
               },
             ),
             ListTile(title: Text('Relationship quiz'), onTap: () {
@@ -121,7 +122,7 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
     ListTile(
     title: Text('Dating abuse statistics'),
     onTap: () {
-    print("fax");
+      launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
     },
     ),
     ListTile(title: Text('Relationship quiz'), onTap: () {
@@ -333,7 +334,7 @@ class RelationshipQuizResults extends StatelessWidget {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                print("fax");
+                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
               },
             ),
             ListTile(title: Text('Relationship quiz'), onTap: () {
@@ -371,7 +372,7 @@ class RelationshipQuizResults extends StatelessWidget {
             Text("${result.headline}\n",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32, color: result.color)),
             Text("${result.body}\n"),
-            Text("\nVisit the Resources tab for assistance.",
+            Text("\nVisit the Resources page for assistance.",
                 style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black54)),
           ]
         )

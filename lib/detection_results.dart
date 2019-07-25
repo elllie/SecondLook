@@ -3,6 +3,7 @@ import "awareness_relationship_spectrum.dart";
 import "relationship_quiz.dart";
 import "resources_home.dart";
 import "detection_home.dart";
+import 'package:url_launcher/url_launcher.dart';
 
 class DetectionResults extends StatelessWidget {
   List<Widget> conversation;
@@ -44,7 +45,7 @@ class DetectionResults extends StatelessWidget {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                print("fax");
+                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
               },
             ),
             ListTile(
@@ -133,7 +134,7 @@ class DetectionDetails extends StatelessWidget {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                print("fax");
+                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
               },
             ),
             ListTile(

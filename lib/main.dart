@@ -72,7 +72,7 @@ class Home extends StatelessWidget {
           ListTile(
             title: Text('Dating abuse statistics'),
             onTap: () {
-              print("fax");
+              launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
             },
           ),
           ListTile(title: Text('Relationship quiz'), onTap: () {
@@ -176,7 +176,7 @@ class AwarenessHome extends StatelessWidget {
               splashColor: Theme.of(context).splashColor,
               onTap: () {
                 launch(
-                    'https://www.dropbox.com/s/2mp16y1f7potrf3/Dating_Abuse_Statistics.pdf?dl=0');
+                    'https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
               },
               child: Column(
                 children: <Widget>[
