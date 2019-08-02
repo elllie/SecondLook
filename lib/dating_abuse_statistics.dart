@@ -36,13 +36,59 @@ class DatingAbuseStatistics extends StatelessWidget {
           Text("Long-lasting effects\n", style: Theme.of(context).textTheme.headline,),
           Text(" • Violent relationships in adolescence can have serious ramifications by putting the victims at higher risk for substance abuse, eating disorders, risky sexual behavior and further domestic violence.\n"),
           Text(" • Being physically or sexually abused makes teen girls six times more likely to become pregnant and twice as likely to get an STD.\n"),
-          Text(" • Half of youth who have been victims of both dating violence and rape attempt suicide, compared to 12.5% of non-abused girls and 5.4% of non-abused boys./n"),
+          Text(" • Half of youth who have been victims of both dating violence and rape attempt suicide, compared to 12.5% of non-abused girls and 5.4% of non-abused boys.\n"),
 
           Text("Lack of awareness\n", style: Theme.of(context).textTheme.headline,),
           Text(" • Only 33% of teens who were in an abusive relationship ever told anyone about the abuse.\n"),
           Text(" • Eighty-one (81) percent of parents believe teen dating violence is not an issue or admit they don’t know if it's an issue.\n"),
           Text(" • Though 82% of parents feel confident that they could recognize the signs if their child was experiencing dating abuse, a majority of parents (58%) could not correctly identify all the warning signs of abuse.\n"),
-    ],)));
+    ],)),
+    drawer: Drawer(child: ListView(padding: EdgeInsets.all(0),
+      children: <Widget>[DrawerHeader(
+      child: Text('SecondLook', style: TextStyle(color: Colors.white)),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
+              colors: <Color>[Colors.cyan, Colors.pinkAccent])
+      ),
+    ),
+      Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+      ListTile(
+        title: Text('The relationship spectrum'),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AwarenessRelationshipSpectrum()));
+        },
+      ),
+      ListTile(
+        title: Text('Dating abuse statistics'),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DatingAbuseStatistics()));
+        },
+      ),
+      ListTile(title: Text('Relationship quiz'), onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RelationshipQuizHome()));
+      },),
+      Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+      ListTile(title: Text('Analyze messages'), onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetectionHome()));
+      },),
+      Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+      ListTile(title: Text('In your area'), onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ResourcesHome()));
+      },),
+    ],
+    )));
   }
 
 }
