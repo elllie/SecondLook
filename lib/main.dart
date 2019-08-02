@@ -3,13 +3,16 @@ import "awareness_relationship_spectrum.dart";
 import "detection_home.dart";
 import "resources_home.dart";
 import "relationship_quiz.dart";
-import 'package:url_launcher/url_launcher.dart';
+import "dating_abuse_statistics.dart";
 import "detection_loading.dart";
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -72,7 +75,7 @@ class Home extends StatelessWidget {
           ListTile(
             title: Text('Dating abuse statistics'),
             onTap: () {
-              launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DatingAbuseStatistics()));
             },
           ),
           ListTile(title: Text('Relationship quiz'), onTap: () {
@@ -175,8 +178,7 @@ class AwarenessHome extends StatelessWidget {
           child: InkWell(
               splashColor: Theme.of(context).splashColor,
               onTap: () {
-                launch(
-                    'https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DatingAbuseStatistics()));
               },
               child: Column(
                 children: <Widget>[

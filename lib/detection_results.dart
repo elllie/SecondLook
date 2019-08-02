@@ -3,7 +3,7 @@ import "awareness_relationship_spectrum.dart";
 import "relationship_quiz.dart";
 import "resources_home.dart";
 import "detection_home.dart";
-import 'package:url_launcher/url_launcher.dart';
+import "dating_abuse_statistics.dart";
 
 class DetectionResults extends StatelessWidget {
   List<Widget> conversation;
@@ -26,13 +26,7 @@ class DetectionResults extends StatelessWidget {
                       colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
             ),
-            Text(
-              '\n   AWARENESS',
-              style: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 11.0),
-            ),
+            Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
             ListTile(
               title: Text('The relationship spectrum'),
               onTap: () {
@@ -45,48 +39,31 @@ class DetectionResults extends StatelessWidget {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DatingAbuseStatistics()));
               },
             ),
-            ListTile(
-              title: Text('Relationship quiz'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RelationshipQuizHome()));
-              },
-            ),
-            Text(
-              '\n   DETECTION',
-              style: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 11.0),
-            ),
-            ListTile(
-              title: Text('Analyze messages'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetectionHome()));
-              },
-            ),
-            Text(
-              '\n   RESOURCES',
-              style: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 11.0),
-            ),
-            ListTile(
-              title: Text('In your area'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResourcesHome()));
-              },
-            ),
+            ListTile(title: Text('Relationship quiz'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RelationshipQuizHome()));
+            },),
+            Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('Analyze messages'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetectionHome()));
+            },),
+            Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('In your area'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResourcesHome()));
+            },),
           ],
-        )),
+            )),
         body: ListView(
           padding: EdgeInsets.all(16.0),
           children: conversation,
@@ -115,13 +92,7 @@ class DetectionDetails extends StatelessWidget {
                       colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
             ),
-            Text(
-              '\n   AWARENESS',
-              style: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 11.0),
-            ),
+            Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
             ListTile(
               title: Text('The relationship spectrum'),
               onTap: () {
@@ -134,48 +105,31 @@ class DetectionDetails extends StatelessWidget {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DatingAbuseStatistics()));
               },
             ),
-            ListTile(
-              title: Text('Relationship quiz'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RelationshipQuizHome()));
-              },
-            ),
-            Text(
-              '\n   DETECTION',
-              style: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 11.0),
-            ),
-            ListTile(
-              title: Text('Analyze messages'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetectionHome()));
-              },
-            ),
-            Text(
-              '\n   RESOURCES',
-              style: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 11.0),
-            ),
-            ListTile(
-              title: Text('In your area'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResourcesHome()));
-              },
-            ),
+            ListTile(title: Text('Relationship quiz'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RelationshipQuizHome()));
+            },),
+            Text('\n   DETECTION', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('Analyze messages'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetectionHome()));
+            },),
+            Text('\n   RESOURCES', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
+            ListTile(title: Text('In your area'), onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResourcesHome()));
+            },),
           ],
-        )),
+            )),
         body: ListView(
           padding: EdgeInsets.all(16.0),
           children: abusiveList,

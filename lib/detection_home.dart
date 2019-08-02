@@ -4,7 +4,7 @@ import "detection_loading.dart";
 import "awareness_relationship_spectrum.dart";
 import "relationship_quiz.dart";
 import "resources_home.dart";
-import 'package:url_launcher/url_launcher.dart';
+import "dating_abuse_statistics.dart";
 
 
 class DetectionHome extends StatefulWidget {
@@ -53,7 +53,7 @@ class _DetectionHomeState extends State<DetectionHome> {
             ListTile(
               title: Text('Dating abuse statistics'),
               onTap: () {
-                launch('https://drive.google.com/file/d/1ZP3AN3JI_oQx_FzdfAOhYQ-xGeoke0OH/view?usp=sharing');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DatingAbuseStatistics()));
               },
             ),
             ListTile(title: Text('Relationship quiz'), onTap: () {
