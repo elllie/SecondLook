@@ -73,7 +73,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
   }
 
   Future<List> analyzeMessages() async {
-    final String ip = "192.168.0.5:5000"; // matt house
+//    final String ip = "192.168.0.5:5000"; // matt house
 //    final String ip = "172.16.8.96:5000";    // ncf
     setState(() {
       progress += 0.2;
