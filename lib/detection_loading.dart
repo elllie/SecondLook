@@ -74,7 +74,7 @@ class DetectionLoadingState extends State<DetectionLoading> {
 
   Future<List> analyzeMessages() async {
 //    final String ip = "192.168.0.5:5000"; // matt house
-//    final String ip = "172.16.8.96:5000";    // ncf
+    final String ip = "172.16.11.209:5000";    // ncf
     setState(() {
       progress += 0.2;
       currentAction = "Analyzing messages...";
@@ -198,7 +198,11 @@ class DetectionLoadingState extends State<DetectionLoading> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => resultDetail));
                 },
-                child: Text("MORE INFO"),
+                child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                  Icon(Icons.filter_list),
+                  Text("ABUSIVE ONLY")]),
                 color: Colors.pinkAccent,
                 textColor: Colors.white)));
     conversation.insert(2, Text("\n"));
