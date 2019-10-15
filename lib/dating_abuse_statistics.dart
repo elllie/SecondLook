@@ -3,7 +3,7 @@ import "awareness_relationship_spectrum.dart";
 import "detection_home.dart";
 import "resources_home.dart";
 import "relationship_quiz.dart";
-import "detection_loading.dart";
+import "main.dart";
 
 class DatingAbuseStatistics extends StatelessWidget {
   @override
@@ -51,6 +51,15 @@ class DatingAbuseStatistics extends StatelessWidget {
               colors: <Color>[Colors.cyan, Colors.pinkAccent])
       ),
     ),
+        ListTile(
+          title: Text('Home'),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Home()));
+          },
+        ),
       Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
       ListTile(
         title: Text('The relationship spectrum'),

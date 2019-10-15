@@ -4,6 +4,7 @@ import "relationship_quiz.dart";
 import "resources_home.dart";
 import "detection_home.dart";
 import "dating_abuse_statistics.dart";
+import "main.dart";
 
 class DetectionResults extends StatelessWidget {
   List<Widget> conversation;
@@ -25,6 +26,15 @@ class DetectionResults extends StatelessWidget {
                   gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
                       colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Home()));
+              },
             ),
             Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
             ListTile(

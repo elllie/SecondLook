@@ -5,6 +5,7 @@ import "awareness_relationship_spectrum.dart";
 import "relationship_quiz.dart";
 import "resources_home.dart";
 import "dating_abuse_statistics.dart";
+import "main.dart";
 
 
 class DetectionHome extends StatefulWidget {
@@ -41,32 +42,41 @@ class _DetectionHomeState extends State<DetectionHome> {
                       colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
             ),
-        ListTile(
-          title: Text('Set Flask IP address'),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => new Scaffold(
-                      appBar: AppBar(title: Text("Set IP address")),
-                      body: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                            Text('Enter the IP address of the server.\n\nNote: must have :5000 at the end, otherwise a random port number will be selected'),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextField(
-                            decoration: InputDecoration(labelText: '123.456.7.89:5000'),
-                            controller: _ipController,
-                          ), ),
-                              RaisedButton(child: Text('SET'), onPressed: () {
-                                DetectionLoadingState.ip = _ipController.text;
-                              },)
-                    ]))))
-            );},),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Home()));
+              },
+            ),
+//        ListTile(
+//          title: Text('Set Flask IP address'),
+//          onTap: () {
+//            Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                    builder: (context) => new Scaffold(
+//                      appBar: AppBar(title: Text("Set IP address")),
+//                      body: Padding(
+//                        padding: EdgeInsets.all(16.0),
+//                        child: Column(
+//                            crossAxisAlignment: CrossAxisAlignment.center,
+//                            mainAxisAlignment: MainAxisAlignment.start,
+//                            children: <Widget>[
+//                            Text('Enter the IP address of the server.\n\nNote: must have :5000 at the end, otherwise a random port number will be selected'),
+//                        Padding(
+//                          padding: EdgeInsets.symmetric(vertical: 8.0),
+//                          child: TextField(
+//                            decoration: InputDecoration(labelText: '123.456.7.89:5000'),
+//                            controller: _ipController,
+//                          ), ),
+//                              RaisedButton(child: Text('SET'), onPressed: () {
+//                                DetectionLoadingState.ip = _ipController.text;
+//                              },)
+//                    ]))))
+//            );},),
             Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
             ListTile(
               title: Text('The relationship spectrum'),

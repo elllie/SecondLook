@@ -5,6 +5,7 @@ import "awareness_relationship_spectrum.dart";
 import "detection_home.dart";
 import "resources_home.dart";
 import 'package:url_launcher/url_launcher.dart';
+import "main.dart";
 
 
 class RelationshipQuizHome extends StatelessWidget {
@@ -24,6 +25,15 @@ class RelationshipQuizHome extends StatelessWidget {
                   gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
                       colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Home()));
+              },
             ),
             Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
             ListTile(
@@ -78,7 +88,9 @@ class RelationshipQuizHome extends StatelessWidget {
             textColor: Colors.white,
             color: Colors.pinkAccent,
             child: const Text("START QUIZ"),
-          )
+          ),
+            Spacer(),
+        Text("Source: www.loveisrespect.org", style: TextStyle(fontSize: 10.0))
         ]))));
   }
 }
@@ -109,6 +121,15 @@ class RelationshipQuizState extends State<RelationshipQuiz> {
             gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
                 colors: <Color>[Colors.cyan, Colors.pinkAccent])
         ),
+      ),
+      ListTile(
+        title: Text('Home'),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Home()));
+        },
       ),
       Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
       ListTile(
@@ -321,6 +342,15 @@ class RelationshipQuizResults extends StatelessWidget {
                   gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter,
                       colors: <Color>[Colors.cyan, Colors.pinkAccent])
               ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Home()));
+              },
             ),
             Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
             ListTile(

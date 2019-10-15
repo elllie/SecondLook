@@ -62,6 +62,15 @@ class Home extends StatelessWidget {
                     colors: <Color>[Colors.cyan, Colors.pinkAccent])
             ),
           ),
+          ListTile(
+            title: Text('Home'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Home()));
+            },
+          ),
           Text('\n   AWARENESS', style: TextStyle(color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 11.0),),
           ListTile(
             title: Text('The relationship spectrum'),
