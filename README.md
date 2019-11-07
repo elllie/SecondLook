@@ -10,4 +10,4 @@ SecondLook has three main features:
 
 ## Detection feature
 
-SecondLook uses a linear support vector model to classify individual text messages as either "abusive" or "non-abusive". (More information on the training data and machine learning techniques used by the app can be found here: [Roy, Tania, "SecondLook: A Prototype Mobile Phone Intervention for Digital Dating Abuse" (2018). All Dissertations. 2190.](https://tigerprints.clemson.edu/all_dissertations/2190).
+SecondLook uses a linear support vector model to classify individual text messages as either "abusive" or "non-abusive". (More information on the training data and machine learning techniques used by the app can be found here: [Roy, Tania, "SecondLook: A Prototype Mobile Phone Intervention for Digital Dating Abuse" (2018). All Dissertations. 2190.](https://tigerprints.clemson.edu/all_dissertations/2190).)
