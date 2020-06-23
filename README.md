@@ -5,9 +5,5 @@ Digital dating abuse (a form of interpersonal violence which takes place digital
 SecondLook has three main features:
 
 * **Awareness:** What makes a relationship healthy? The Awareness feature provides information on how to tell if a relationship is becoming unhealthy, plus statistics on the spread of dating abuse nationally.
-* **Detection:** Users upload their text message history with one of their contacts, and SecondLook uses machine learning techniques to determine which, if any, of those messages contain abusive language. More on this feature below.
+* **Detection:** Users upload their text message history with one of their contacts, and SecondLook uses machine learning techniques to determine which, if any, of those messages contain abusive language. (More information on the training data and machine learning techniques used by the app can be found [here.](https://tigerprints.clemson.edu/all_dissertations/2190)
 * **Resources:** Search for local abuse hotlines, shelters, and other resources in any area.
-
-#### Detection feature
-
-SecondLook uses a linear support vector model to classify individual text messages as either "abusive" or "non-abusive". (More information on the training data and machine learning techniques used by the app can be found [here.](https://tigerprints.clemson.edu/all_dissertations/2190)
